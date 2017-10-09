@@ -131,7 +131,7 @@ public class Human implements Player
         else
         {
             System.out.println("Error. Tippe 1 für Spiel oder 0 für nicht spielen");
-            k = sca.nextInt();
+            return setWannaplay();
         }
         return k;
     }
@@ -143,7 +143,7 @@ public class Human implements Player
 
         //darf nur gemacht werden, wenn wannaplay true ist
         if (wannaplay) {
-            System.out.println("Was spielst du?");
+            System.out.println("Was spielst du? 1 - 3 Sauspiele S G E, 4 Wenz, 5 - 8 Solo S G E H");
             Scanner scan = new Scanner(System.in);
             int l = scan.nextInt();
             switch (l){
@@ -155,14 +155,13 @@ public class Human implements Player
                 case 6 : return Mode.MODE_TYPE.SOLOGRAS;
                 case 7 : return Mode.MODE_TYPE.SOLOEICHEL;
                 case 8 : return Mode.MODE_TYPE.SOLOHERZ;
-                default : System.err.println("Error"); play();
+                default : System.err.println("Error"); return play();
             }
         }
         else
         {
             return null;
         }
-        return null;
     }
 
     //mögliche karten werden gezeigt, eine ausgewählt und gelegt
@@ -170,7 +169,7 @@ public class Human implements Player
     {
         Card playingCard = null;
         Mode m = game.getMode();
-        LinkedList<Card> temp = m.showPlayableCards(hand, game.getDump(), game.getCallingColor(), game.getMode().getModeType());
+        LinkedList<Card> temp = m.showPlayableCards((LinkedList<Card>) hand.clone(), game.getDump(), game.getCallingColor(), game.getMode().getModeType());
         System.out.println("Du hast die Karten : ");
         for (Card karte: temp)
         {
@@ -211,7 +210,7 @@ public class Human implements Player
     {}
 
     public void giveMode(Mode.MODE_TYPE m) {
-        System.out.println("Der gespielte Mode ist: " +m);
+        System.out.println(name + "Der gespielte Mode ist: " +m);
     }
 
     public void giveSpielender(int p) {

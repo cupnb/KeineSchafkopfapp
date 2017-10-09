@@ -9,7 +9,7 @@ import de.emghaar.game.card.CardRank;
 
 import static de.emghaar.game.Mode.MODE_TYPE.NICHTS;
 import static de.emghaar.game.Mode.MODE_TYPE.RAMSCH;
-
+//TODO Zum Laufen bringen
 //Hauptklasse, die alles steuert, und ueber die das Game hauptsaechlich laeuft --> Vergleiche typisches Schafkopfspiel
 public class Game {
 
@@ -146,9 +146,9 @@ public class Game {
         boolean[] willSpieler;
         willSpieler = spielenWill(4);
         //Abfrage wer SPIELT
-        //Array Mode zur Auswahl des Mode's durch Ausnutzen des Enums
+        //Array Mode zur Auswahl des Mode's durch Ausnutzen (der Arme D:)des Enums
         Mode.MODE_TYPE[] modefeld = new Mode.MODE_TYPE[4];
-        //int zur Festlegung des endgueltigen Spielers --> Festlegen von Spieler und NIcht-Spieler
+        //int zur Festlegung des endgueltigen Spielers --> Festlegen von Spieler und Nicht-Spieler
         int endgueltigerPlayer = -1;
         //Wenn niemand spielen will --> Ramsch
         //Wenn genau eine Person spielen will, dann wird der gewuenschte Mode der Person genommen
@@ -215,6 +215,7 @@ public class Game {
             players[endgueltigerPlayer].setPlayer(true);
             System.out.println("Spieler " +players[endgueltigerPlayer].getName() +" spielt");
         }
+        //TODO das reicht auch einmal
         for (int e = 0; e<4; e++)
         {
             players[e].giveSpielender(endgueltigerPlayer);
@@ -517,6 +518,7 @@ public class Game {
             }
         }
         System.out.println("spielenWill abgeschlossen");
+        //TODO Hier darf nicht immer wieder neu
         return willSpieler;
     }
 }
