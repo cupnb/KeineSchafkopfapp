@@ -10,7 +10,7 @@ public interface Player
     void setGame(Game g);
     void setPlayer(boolean p);
     boolean getPlayer();
-    void stichpunkterhöhen();
+    void stichpunkterhoehen();
     int getPunkte();
     void addStich(Stack<Card> s);
     void addCards(Stack<Card> c);

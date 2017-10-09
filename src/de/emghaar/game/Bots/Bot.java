@@ -42,8 +42,8 @@ public class Bot implements Player
     }
 
     //------------------------Anfang Default Methoden------------------
-    //Methode, die die Stichpunktanzahl des Players um 1 erhöht
-    public void stichpunkterhöhen(){
+    //Methode, die die Stichpunktanzahl des Players um 1 erhoeht
+    public void stichpunkterhoehen(){
         stichanzahl = stichanzahl + 1;
     }
 

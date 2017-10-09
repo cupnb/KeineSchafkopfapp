@@ -4,13 +4,10 @@ package de.emghaar.game;
 import java.util.LinkedList;
 import java.util.Stack;
 
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-
 import de.emghaar.game.card.Card;
 import de.emghaar.game.card.CardColor;
 import de.emghaar.game.card.CardRank;
 
-import static de.emghaar.game.Mode.MODE_TYPE.*;
 import static de.emghaar.game.Mode.MODE_TYPE.*;
 
 
