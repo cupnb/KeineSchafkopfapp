@@ -13,86 +13,7 @@ import static de.emghaar.game.Mode.MODE_TYPE.*;
 
 //Klasse die alles um den Spielmodus enthält
 public class Mode {
-    //Enumeration für alle Modes
-    public enum MODE_TYPE
-    {
-        NICHTS,
-        SAUSPIELSCHELLEN,
-        SAUSPIELGRAS,
-        SAUSPIELEICHEL,
-        WENZ,
-        SOLOSCHELLEN,
-        SOLOGRAS,
-        SOLOEICHEL,
-        SOLOHERZ,
-        RAMSCH;
-
-        //Methode, die einen Modus zum String macht
-        public String toString(){
-            switch(this){
-                case SAUSPIELSCHELLEN :
-                    return "SAUSPIELSCHELLEN";
-                case SAUSPIELGRAS :
-                    return "SAUSPIELGRAS";
-                case SAUSPIELEICHEL :
-                    return "SAUSPIELEICHEL";
-                case WENZ :
-                    return "WENZ";
-                case SOLOSCHELLEN :
-                    return "SOLOSCHELLEN";
-                case SOLOGRAS :
-                    return "SOLOGRAS";
-                case SOLOEICHEL :
-                    return "SOLOEICHEL";
-                case SOLOHERZ :
-                    return "SOLOHERZ";
-                case RAMSCH :
-                    return "RAMSCH";
-                case NICHTS :
-                    return "NICHTS";
-            }
-            return null;
-        }
-
-        //Vergleichen von zwei Modes
-        public static MODE_TYPE vergleiche(String value){
-            if(value.equalsIgnoreCase(SAUSPIELSCHELLEN.toString()))
-                return MODE_TYPE.SAUSPIELSCHELLEN;
-            else if(value.equalsIgnoreCase(SAUSPIELGRAS.toString()))
-                return MODE_TYPE.SAUSPIELGRAS;
-            else if(value.equalsIgnoreCase(SAUSPIELEICHEL.toString()))
-                return MODE_TYPE.SAUSPIELEICHEL;
-            else if(value.equalsIgnoreCase(WENZ.toString()))
-                return WENZ;
-            else if(value.equalsIgnoreCase(SOLOSCHELLEN.toString()))
-                return MODE_TYPE.SOLOSCHELLEN;
-            else if(value.equalsIgnoreCase(SOLOGRAS.toString()))
-                return MODE_TYPE.SOLOGRAS;
-            else if(value.equalsIgnoreCase(SOLOEICHEL.toString()))
-                return MODE_TYPE.SOLOEICHEL;
-            else if(value.equalsIgnoreCase(SOLOHERZ.toString()))
-                return MODE_TYPE.SOLOHERZ;
-            else if(value.equalsIgnoreCase(RAMSCH.toString()))
-                return MODE_TYPE.RAMSCH;
-            else if (value.equalsIgnoreCase(NICHTS.toString()))
-                return MODE_TYPE.NICHTS;
-            else
-                return null;
-        }
-
-        int getOrdinal(String name)
-        {
-            try {
-                return MODE_TYPE.valueOf( name ).ordinal();
-            }
-            catch ( IllegalArgumentException e ) {
-                return -1;
-            }
-        }
-    }
-
     private MODE_TYPE mode_type;
-
     //Ruffarbe des Modes (bei Soli, Ramsch oder Wenz --> null)
     //1 = Schellen
     //2 = Laub
@@ -344,9 +265,6 @@ public class Mode {
         }
     }
 
-
-
-
     //geeignet für Wenz und alle Soli (außer Herz)
     void comparisonAktualisieren(LinkedList<Card> c1, MODE_TYPE m)
     {
@@ -363,41 +281,17 @@ public class Mode {
                 case SOLOSCHELLEN:
                     if(temporary.getColor() == CardColor.SCHELLEN)
                     {
-                        switch (temporary.getRank())
-                        {
-                            case SIEBEN: temporary.getRank().setComparison(61);
-                            case ACHT: temporary.getRank().setComparison(62);
-                            case NEUN: temporary.getRank().setComparison(63);
-                            case KOENIG: temporary.getRank().setComparison(64);
-                            case ZEHN: temporary.getRank().setComparison(65);
-                            case ASS: temporary.getRank().setComparison(66);
-                        }
+                        setComparison(temporary);
                     }
                 case SOLOGRAS:
                     if(temporary.getColor() == CardColor.LAUB)
                     {
-                        switch (temporary.getRank())
-                        {
-                            case SIEBEN: temporary.getRank().setComparison(61);
-                            case ACHT: temporary.getRank().setComparison(62);
-                            case NEUN: temporary.getRank().setComparison(63);
-                            case KOENIG: temporary.getRank().setComparison(64);
-                            case ZEHN: temporary.getRank().setComparison(65);
-                            case ASS: temporary.getRank().setComparison(66);
-                        }
+                        setComparison(temporary);
                     }
                 case SOLOEICHEL:
                     if(temporary.getColor() == CardColor.EICHEL)
                     {
-                        switch (temporary.getRank())
-                        {
-                            case SIEBEN: temporary.getRank().setComparison(61);
-                            case ACHT: temporary.getRank().setComparison(62);
-                            case NEUN: temporary.getRank().setComparison(63);
-                            case KOENIG: temporary.getRank().setComparison(64);
-                            case ZEHN: temporary.getRank().setComparison(65);
-                            case ASS: temporary.getRank().setComparison(66);
-                        }
+                        setComparison(temporary);
                     }
             }
 
@@ -407,21 +301,7 @@ public class Mode {
     //geeignet für Ramsch, Solo Herz und alle Sauspiele
     void comparisonSetStandard(LinkedList<Card> c1)
     {
-        for(Card temporary:c1)
-        {
-            if(temporary.getColor() == CardColor.HERZ)
-            {
-                switch (temporary.getRank())
-                {
-                    case SIEBEN: temporary.getRank().setComparison(61);
-                    case ACHT: temporary.getRank().setComparison(62);
-                    case NEUN: temporary.getRank().setComparison(63);
-                    case KOENIG: temporary.getRank().setComparison(64);
-                    case ZEHN: temporary.getRank().setComparison(65);
-                    case ASS: temporary.getRank().setComparison(66);
-                }
-            }
-        }
+        c1.stream().filter(temporary -> temporary.getColor() == CardColor.HERZ).forEach(this::setComparison);
     }
 
     //muss immer gemacht werden
@@ -484,5 +364,97 @@ public class Mode {
             }
         }
         return true;
+    }
+
+    private void setComparison(Card temporary) {
+        switch (temporary.getRank()) {
+            case SIEBEN:
+                temporary.getRank().setComparison(61);
+            case ACHT:
+                temporary.getRank().setComparison(62);
+            case NEUN:
+                temporary.getRank().setComparison(63);
+            case KOENIG:
+                temporary.getRank().setComparison(64);
+            case ZEHN:
+                temporary.getRank().setComparison(65);
+            case ASS:
+                temporary.getRank().setComparison(66);
+        }
+    }
+
+    //Enumeration für alle Modes
+    public enum MODE_TYPE {
+        NICHTS,
+        SAUSPIELSCHELLEN,
+        SAUSPIELGRAS,
+        SAUSPIELEICHEL,
+        WENZ,
+        SOLOSCHELLEN,
+        SOLOGRAS,
+        SOLOEICHEL,
+        SOLOHERZ,
+        RAMSCH;
+
+        //Vergleichen von zwei Modes
+        public static MODE_TYPE vergleiche(String value) {
+            if (value.equalsIgnoreCase(SAUSPIELSCHELLEN.toString()))
+                return MODE_TYPE.SAUSPIELSCHELLEN;
+            else if (value.equalsIgnoreCase(SAUSPIELGRAS.toString()))
+                return MODE_TYPE.SAUSPIELGRAS;
+            else if (value.equalsIgnoreCase(SAUSPIELEICHEL.toString()))
+                return MODE_TYPE.SAUSPIELEICHEL;
+            else if (value.equalsIgnoreCase(WENZ.toString()))
+                return WENZ;
+            else if (value.equalsIgnoreCase(SOLOSCHELLEN.toString()))
+                return MODE_TYPE.SOLOSCHELLEN;
+            else if (value.equalsIgnoreCase(SOLOGRAS.toString()))
+                return MODE_TYPE.SOLOGRAS;
+            else if (value.equalsIgnoreCase(SOLOEICHEL.toString()))
+                return MODE_TYPE.SOLOEICHEL;
+            else if (value.equalsIgnoreCase(SOLOHERZ.toString()))
+                return MODE_TYPE.SOLOHERZ;
+            else if (value.equalsIgnoreCase(RAMSCH.toString()))
+                return MODE_TYPE.RAMSCH;
+            else if (value.equalsIgnoreCase(NICHTS.toString()))
+                return MODE_TYPE.NICHTS;
+            else
+                return null;
+        }
+
+        //Methode, die einen Modus zum String macht
+        public String toString() {
+            switch (this) {
+                case SAUSPIELSCHELLEN:
+                    return "SAUSPIELSCHELLEN";
+                case SAUSPIELGRAS:
+                    return "SAUSPIELGRAS";
+                case SAUSPIELEICHEL:
+                    return "SAUSPIELEICHEL";
+                case WENZ:
+                    return "WENZ";
+                case SOLOSCHELLEN:
+                    return "SOLOSCHELLEN";
+                case SOLOGRAS:
+                    return "SOLOGRAS";
+                case SOLOEICHEL:
+                    return "SOLOEICHEL";
+                case SOLOHERZ:
+                    return "SOLOHERZ";
+                case RAMSCH:
+                    return "RAMSCH";
+                case NICHTS:
+                    return "NICHTS";
+            }
+            return null;
+        }
+
+        int getOrdinal(String name) {
+            try {
+                return MODE_TYPE.valueOf(name).ordinal();
+            } catch (IllegalArgumentException e) {
+                return -1;
+            }
+        }
     }
 }
