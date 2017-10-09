@@ -24,7 +24,7 @@ public class Game {
     private Mode mode;
     //Beinhaltet 32 Spielkarten
     private Deck deck;
-    //Stack, der alle Karten aufnimmt --> wird zum Mischen in der naechsten Runde verwendet
+    //Stack, der alle Karten aufnimmt   --> wird zum Mischen in der naechsten Runde verwendet
     private Stack<Card> dump;
     //Matrix zum Speichern der Karten --> Nötig fuer den Bot
     private Card[][] matrix;
@@ -131,7 +131,7 @@ public class Game {
         for(int l = 0; l<4; l++)
         {
             for (Card karte : players[l].getHand()) {
-                System.out.println("Spieler " +l +" : " +karte.getColor() + " mit Wert " + karte.getRank());
+                System.out.println("Spieler " + players[l].getName() +" : " +karte.getColor() + " mit Wert " + karte.getRank());
                 //Gibt Karten aus
             }
             System.out.println("");
@@ -213,7 +213,7 @@ public class Game {
         if (endgueltigerPlayer  == 0 || endgueltigerPlayer == 1 || endgueltigerPlayer == 2 || endgueltigerPlayer == 3) {
             //Spieler wird gesetzt
             players[endgueltigerPlayer].setPlayer(true);
-            System.out.println("Spieler " +endgueltigerPlayer +" spielt");
+            System.out.println("Spieler " +players[endgueltigerPlayer].getName() +" spielt");
         }
         for (int e = 0; e<4; e++)
         {
@@ -228,19 +228,19 @@ public class Game {
                 now = sucheKarte(players[0].getHand(), players[1].getHand(), players[2].getHand(), players[3].getHand(), CardRank.ASS, CardColor.EICHEL);
                 players[now].setPlayer(true);
                 setCallingColor(3);
-                System.out.println("Zusammen mit " +now );
+                System.out.println("Zusammen mit " + players[now].getName() );
                 break;
             case SAUSPIELSCHELLEN:
                 now = sucheKarte(players[0].getHand(), players[1].getHand(), players[2].getHand(), players[3].getHand(), CardRank.ASS, CardColor.SCHELLEN);
                 players[now].setPlayer(true);
                 setCallingColor(1);
-                System.out.println("Zusammen mit " +now );
+                System.out.println("Zusammen mit " +players[now].getName() );
                 break;
             case SAUSPIELGRAS:
                 now = sucheKarte(players[0].getHand(), players[1].getHand(), players[2].getHand(), players[3].getHand(), CardRank.ASS, CardColor.LAUB);
                 players[now].setPlayer(true);
                 setCallingColor(2);
-                System.out.println("Zusammen mit " +now );
+                System.out.println("Zusammen mit " +players[now].getName() );
                 break;
             //Kontrollfunktion, falls der Mode nicht ausgewaehlt werden konnte
             case NICHTS:
