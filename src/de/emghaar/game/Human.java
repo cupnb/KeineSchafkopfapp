@@ -26,8 +26,6 @@ public class Human implements Player
     private Stack<Card> stiche;
     //Anzahl der Stiche zur Auszählung
     private int stichanzahl;
-    //Boolean zur Unterschiedung zwischen Bot und Human
-    private boolean bot;
     //Listenlänge von der Hamd
     private int laenge;
 
@@ -44,7 +42,7 @@ public class Human implements Player
         online = false;
         stiche = new Stack<>();
         stichanzahl = 0;
-        bot = false;
+        boolean bot = false;
     }
 
     //setter Methode von game
@@ -75,7 +73,7 @@ public class Human implements Player
     }
 
     //Methode, die die Stichpunktanzahl des Players um 1 erhöht
-    public void stichpunkterhöhen(){
+    public void stichpunkterhoehen(){
         stichanzahl = stichanzahl + 1;
     }
 

@@ -10,23 +10,23 @@ import de.emghaar.game.card.CardRank;
 import static de.emghaar.game.Mode.MODE_TYPE.NICHTS;
 import static de.emghaar.game.Mode.MODE_TYPE.RAMSCH;
 
-//Hauptklasse, die alles steuert, und über die das Game hauptsächlich läuft --> Vergleiche typisches Schafkopfspiel
+//Hauptklasse, die alles steuert, und ueber die das Game hauptsaechlich laeuft --> Vergleiche typisches Schafkopfspiel
 public class Game {
 
-    //Feld für die Spieler; 4 Spieler werden dem Feld im Konstruktor zugewiesen
+    //Feld fuer die Spieler; 4 Spieler werden dem Feld im Konstruktor zugewiesen
     private Player[] players;
 
-    //Person, die imaginär die Karten austeilt; wichtig für Ansage wer spielt und wer rauskommt
+    //Person, die imaginaer die Karten austeilt; wichtig fuer Ansage wer spielt und wer rauskommt
     private int dealer;
-    //Stack für die Karten, die gerade im Stich gespielt wurden
+    //Stack fuer die Karten, die gerade im Stich gespielt wurden
     private Stack<Card> played;
     //Modus des SPiels (Bsp.: Herzsolo)
     private Mode mode;
     //Beinhaltet 32 Spielkarten
     private Deck deck;
-    //Stack, der alle Karten aufnimmt --> wird zum Mischen in der nächsten Runde verwendet
+    //Stack, der alle Karten aufnimmt --> wird zum Mischen in der naechsten Runde verwendet
     private Stack<Card> dump;
-    //Matrix zum Speichern der Karten --> Nötig für den Bot
+    //Matrix zum Speichern der Karten --> Nötig fuer den Bot
     private Card[][] matrix;
     //Anzahl der gespielten Stiche
     private int playedStiche;
@@ -46,7 +46,7 @@ public class Game {
         Random rnd = new Random();
         //Initialisierung des Feld Players (siehe Attribute)
         players = new Player[4];
-        //Mode wird zurückgesetzt
+        //Mode wird zurueckgesetzt
         mode = new Mode(NICHTS);
 
         //irgendein Graphikzeugs
@@ -87,7 +87,7 @@ public class Game {
         return mode;
     }
 
-    //Fügt eine gespielte Karte zu dump und played hinzu
+    //Fuegt eine gespielte Karte zu dump und played hinzu
     void addgespielteKarte(Card f) {
         dump.add(f);
         played.add(f);
@@ -100,17 +100,17 @@ public class Game {
 
     private void initialize() {
         System.out.println("Methode initialize aufgerufen");
-        //Ruffarbe wird zurückgesetzt
+        //Ruffarbe wird zurueckgesetzt
         setCallingColor(-1);
         //Roundnumber wird um eins erhöht
         roundnumber++;
         //Ruffarbe wird auf den Standard gesetzt
         mode.setTrumpfcolor(2);
-        //Mode wird zurückgesetzt
+        //Mode wird zurueckgesetzt
         mode.setModeType(NICHTS);
         //PlayedStiche wird reseted
         playedStiche = 0;
-        //anzahlSpielenWollen wird zurückgesetzt
+        //anzahlSpielenWollen wird zurueckgesetzt
         anzahlSpielenWollen = 0;
         //Deck wird gemischt
         if (roundnumber != 1)
@@ -142,27 +142,27 @@ public class Game {
             players[o].giveNumber(o);
         }
 
-        System.out.println("Auswahlverfahren für den Mode gestartet");
+        System.out.println("Auswahlverfahren fuer den Mode gestartet");
         boolean[] willSpieler;
         willSpieler = spielenWill(4);
         //Abfrage wer SPIELT
         //Array Mode zur Auswahl des Mode's durch Ausnutzen des Enums
         Mode.MODE_TYPE[] modefeld = new Mode.MODE_TYPE[4];
-        //int zur Festlegung des endgültigen Spielers --> Festlegen von Spieler und NIcht-Spieler
-        int endgültigerPlayer = -1;
+        //int zur Festlegung des endgueltigen Spielers --> Festlegen von Spieler und NIcht-Spieler
+        int endgueltigerPlayer = -1;
         //Wenn niemand spielen will --> Ramsch
-        //Wenn genau eine Person spielen will, dann wird der gewünschte Mode der Person genommen
+        //Wenn genau eine Person spielen will, dann wird der gewuenschte Mode der Person genommen
         if (anzahlSpielenWollen == 1) {
-            System.out.println("1 Spieler will spielen. Sein Spielmodus wird übernommen");
+            System.out.println("1 Spieler will spielen. Sein Spielmodus wird uebernommen");
             for (int p = 0; p < 4; p++) {
                 if (willSpieler[p]) {
                     mode.setModeType(players[p].play());
-                    //es wird nachgeprüft, ob der Spieler mit seiner Hand spielen darf --> Sauspiel darf nur ohne die Rufass gespielt werden
+                    //es wird nachgeprueft, ob der Spieler mit seiner Hand spielen darf --> Sauspiel darf nur ohne die Rufass gespielt werden
                     if (mode.SauSpielSpielbar(players[p].getHand(), mode))
                     {
-                        endgültigerPlayer = p;
+                        endgueltigerPlayer = p;
                     }
-                    //Sonst wird nochmal abgefragt, wer spielen will und diese Prozedere von vorne angefangen (p ist der Spieler, der es nicht hinbekommen hat einen richtigen Mode zu wählen)
+                    //Sonst wird nochmal abgefragt, wer spielen will und diese Prozedere von vorne angefangen (p ist der Spieler, der es nicht hinbekommen hat einen richtigen Mode zu waehlen)
                     else
                     {
                         mode.setModeType(NICHTS);
@@ -171,9 +171,9 @@ public class Game {
                 }
             }
         }
-        //Wenn mehr als eine Person spielen will, wird aufgrund der Ordinalzahl des Modes abgewägt, was gespielt wird
+        //Wenn mehr als eine Person spielen will, wird aufgrund der Ordinalzahl des Modes abgewaegt, was gespielt wird
         if (anzahlSpielenWollen > 1) {
-            System.out.println("2-4 Spieler wollen spielen. Sein Spielmodus wird übernommen");
+            System.out.println("2-4 Spieler wollen spielen. Sein Spielmodus wird uebernommen");
             //Modes der Spieler, die spielen wollen werden aufgenommen in das Mode Array
             for (int i = 0; i < 4; i++) {
                 if(willSpieler[i])
@@ -186,38 +186,38 @@ public class Game {
                 }
             }
 
-            //vergleicht ob jemand der später spielen will einen höher priorisierten Mode spielen will (über die Ordinalzahl)
+            //vergleicht ob jemand der spaeter spielen will einen höher priorisierten Mode spielen will (ueber die Ordinalzahl)
             for (int z = 0; z < 4; z++) {
                 if (modefeld[z] != null) {
                     //erster Mode wird gesetzt
                     if (mode.getModeType() == NICHTS) {
                         mode.setModeType(modefeld[z]);
-                        endgültigerPlayer = z;
+                        endgueltigerPlayer = z;
                     }
                     //Vergleich der Modes aufgrund der Ordinalzahl im Enum
                     if (modefeld[z].getOrdinal(modefeld[z].toString()) > mode.getModeType().getOrdinal(mode.toString())) {
                         mode.setModeType(modefeld[z]);
-                        endgültigerPlayer = z;
+                        endgueltigerPlayer = z;
                     }
 
                 }
             }
-            //Mode fürSpiel ist der endgültige Mode
+            //Mode fuerSpiel ist der endgueltige Mode
         }
 
         if (anzahlSpielenWollen == 0) {
-            System.out.println("0 Spieler wollen spielen. Ramsch wird ausgewählt");
+            System.out.println("0 Spieler wollen spielen. Ramsch wird ausgewaehlt");
             mode.setModeType(RAMSCH);
         }
 
-        if (endgültigerPlayer  == 0 || endgültigerPlayer == 1 || endgültigerPlayer == 2 || endgültigerPlayer == 3) {
+        if (endgueltigerPlayer  == 0 || endgueltigerPlayer == 1 || endgueltigerPlayer == 2 || endgueltigerPlayer == 3) {
             //Spieler wird gesetzt
-            players[endgültigerPlayer].setPlayer(true);
-            System.out.println("Spieler " +endgültigerPlayer +" spielt");
+            players[endgueltigerPlayer].setPlayer(true);
+            System.out.println("Spieler " +endgueltigerPlayer +" spielt");
         }
         for (int e = 0; e<4; e++)
         {
-            players[e].giveSpielender(endgültigerPlayer);
+            players[e].giveSpielender(endgueltigerPlayer);
         }
         //Hilfsvariable
         int now;
@@ -242,10 +242,10 @@ public class Game {
                 setCallingColor(2);
                 System.out.println("Zusammen mit " +now );
                 break;
-            //Kontrollfunktion, falls der Mode nicht ausgewählt werden konnte
+            //Kontrollfunktion, falls der Mode nicht ausgewaehlt werden konnte
             case NICHTS:
                 mode.setModeType(RAMSCH);
-                System.err.println("Kein Spielmodus ausgwählt. Ramsch wurde als Spielmodus gesetzt");
+                System.err.println("Kein Spielmodus ausgwaehlt. Ramsch wurde als Spielmodus gesetzt");
         }
 
         //Trumpfcolor wird aufgrund des Modes ferstgelegt
@@ -258,12 +258,12 @@ public class Game {
             case WENZ: mode.setTrumpfcolor(0);
         }
 
-        //Vergleichswerte für Ober und Unter werden angepasst (z.B. Eichel Ober ist über Schellen Ober)
+        //Vergleichswerte fuer Ober und Unter werden angepasst (z.B. Eichel Ober ist ueber Schellen Ober)
         for (int a = 0; a < 4; a++) {
             mode.comparisonOberUnter(players[a].getHand());
         }
 
-        //Vergleichswerte der Trumpfarbe werden angepasst (solange es nicht Herz ist) bzw. die Vergleichswerte werden für einen Wenz angepasst
+        //Vergleichswerte der Trumpfarbe werden angepasst (solange es nicht Herz ist) bzw. die Vergleichswerte werden fuer einen Wenz angepasst
         if (mode.getTrumpfcolor() == 0 || mode.getTrumpfcolor() == 1 || mode.getTrumpfcolor() == 3 || mode.getTrumpfcolor() == 4) {
 
             for (int b = 0; b < 4; b++) {
@@ -279,12 +279,12 @@ public class Game {
 
         }
 
-        //Mode wird an die Spieler bzw. Bots übergeben
+        //Mode wird an die Spieler bzw. Bots uebergeben
         for(int b = 0; b<4; b++) {
             players[b].giveMode(mode.getModeType());
         }
 
-        //Aufruf der Methode loop führt 8 Stiche durch
+        //Aufruf der Methode loop fuehrt 8 Stiche durch
         for (int i = 0; i < 8; i++) {
             loop();
         }
@@ -296,11 +296,11 @@ public class Game {
             dealer = dealer++;
         }
 
-        //Auszählen der Punkte und Bekanntmachung des Gewinners
+        //Auszaehlen der Punkte und Bekanntmachung des Gewinners
         ende();
     }
 
-    //Methode für einen Stich
+    //Methode fuer einen Stich
     private void loop() {
         //Stack mit dem Karten des letzten Stichs werden geleert
         played.clear();
@@ -314,15 +314,15 @@ public class Game {
         for (int x = 0; x < 4; x++) {
             //players[turnState.ordinal()].yourTurn();
             Card Spielkarte = players[(dealer + 1 + x) % 4].kartelegen();
-            //matrix wird mit der jeweiligen Karte befüllt
+            //matrix wird mit der jeweiligen Karte befuellt
             matrix[(dealer + 1 + x) % 4][playedStiche - 1] = Spielkarte;
-            //Übergeben der aktualisierten Matrix an die Player, wenn der Player ein Bot ist
+            //uebergeben der aktualisierten Matrix an die Player, wenn der Player ein Bot ist
             for (int u = 0; u < 4; u++) {
                 if (players[u].isBot()) {
                     players[u].setMatrix(matrix);
                 }
             }
-            //Karte wird zu Dump und Played hinzugefügt
+            //Karte wird zu Dump und Played hinzugefuegt
             addgespielteKarte(Spielkarte);
             //erste Karte wird hingelegt
             if (best == null) {
@@ -349,8 +349,8 @@ public class Game {
         }
         //Stich wird dem Winner des Stichs zugeordnet
         best.addStich(played);
-        //Stichpunktanzahl des Winners wird erhöht --> Dient zur Auszählung am Ende (siehe Methode getPunkte() in Player)
-        best.stichpunkterhöhen();
+        //Stichpunktanzahl des Winners wird erhöht --> Dient zur Auszaehlung am Ende (siehe Methode getPunkte() in Player)
+        best.stichpunkterhoehen();
 
     }
 
@@ -412,11 +412,11 @@ public class Game {
             int most = 0;
             //4 Spieler werden durchgegangen
             for (int i = 0; i < 4; i++) {
-                //Wenn der nächste Spieler mehr Punkte hat, wird er gespeichert
+                //Wenn der naechste Spieler mehr Punkte hat, wird er gespeichert
                 if (players[i].getPunkte() > most) {
                     //Festelegung der Punkte zum weiteren Vergleich
                     most = players[i].getPunkte();
-                    //Festlegung des Spielers zum späteren Aufrufen
+                    //Festlegung des Spielers zum spaeteren Aufrufen
                     lost = i;
                 }
             }
@@ -469,21 +469,21 @@ public class Game {
     private boolean[] spielenWill(int x)
     {
         //int x zum Abfragen, ob ein Spieler einen Fehler beim Eingeben eines Spielmodus gemacht hat
-        //wenn ja --> darf nicht mehr an der nächsten Fragerunde teilnehmen
+        //wenn ja --> darf nicht mehr an der naechsten Fragerunde teilnehmen
         //Standardwert, wenn noch keine Frageunde vorbei ist = 4
-        //int zum "Anfänger" der "Fragerunde"
+        //int zum "Anfaenger" der "Fragerunde"
         System.out.println("Methode spielenWill aufgerufen");
-        int auswähler = (dealer + 1);
+        int auswaehler = (dealer + 1);
         //Anzahl der Leute, die spielen wollen
         //boolean Feld zur Bestimmung, wer spielen will und wer davon spielt
         boolean[] willSpieler = new boolean[4];
 
-        //Erste Runde für Standardwert = 4
+        //Erste Runde fuer Standardwert = 4
         if(x == 4) {
             //for: Abfrage wer spielen will --> True setzen des jeweiligen Indexes
             for (int i = 0; i < 4; i++) {
-                if (players[(auswähler + i) % 4].setWannaplay() != 0) {
-                    willSpieler[(auswähler + i) % 4] = true;
+                if (players[(auswaehler + i) % 4].setWannaplay() != 0) {
+                    willSpieler[(auswaehler + i) % 4] = true;
                     //Anzahl der Personen, die spielen wollen wird um 1 erhöht
                     anzahlSpielenWollen = anzahlSpielenWollen + 1;
                     System.out.println("spielenWill TRUE");
@@ -494,17 +494,17 @@ public class Game {
 
             }
         }
-        //Else für die zweiten Fragerunden
+        //Else fuer die zweiten Fragerunden
         else
         {
             //Alle vier Spieler werden abgefragt, ob sie spielen wollen mithilfe von for
             for (int i = 0; i < 4; i++)
             {
-                //Wenn der Spieler keine Fehler gemacht hat beim Auswählen des Spiels, wird er ganz normal gefragt
+                //Wenn der Spieler keine Fehler gemacht hat beim Auswaehlen des Spiels, wird er ganz normal gefragt
                 //Sonst passiert gar nichts
                 if (i != x)
                 {
-                    if (players[(auswähler + i) % 4].setWannaplay() != 0) {
+                    if (players[(auswaehler + i) % 4].setWannaplay() != 0) {
                         willSpieler[i] = true;
                         //Anzahl der Personen, die spielen wollen wird um 1 erhöht
                         anzahlSpielenWollen = anzahlSpielenWollen + 1;
