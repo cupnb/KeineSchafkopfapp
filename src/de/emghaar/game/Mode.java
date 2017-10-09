@@ -6,11 +6,11 @@ import java.util.Stack;
 
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
-import de.emg_haar.schafkopfdeluxe.game.card.Card;
-import de.emg_haar.schafkopfdeluxe.game.card.CardColor;
-import de.emg_haar.schafkopfdeluxe.game.card.CardRank;
+import de.emghaar.game.card.Card;
+import de.emghaar.game.card.CardColor;
+import de.emghaar.game.card.CardRank;
 
-import static de.emg_haar.schafkopfdeluxe.game.Mode.MODE_TYPE.*;
+import static de.emghaar.game.Mode.MODE_TYPE.*;
 import static de.emghaar.game.Mode.MODE_TYPE.*;
 
 
