@@ -226,7 +226,7 @@ public class Mode {
                 //Boolean, der auf true gesetzt wird, sobald der Player eine Farbkarte der zuerst gespielten Karte hat
                 boolean farbeVorhanden = false;
                 //Durchlaufen des Feldes zum Suchen einer Farbkarte der zuerst gespielten Karte
-                for (int i = 0; i < c3.length; i--) {
+                for (int i = 0; i < c3.length; i++) {
                     //Wenn der Spieler eine weitere Farbkarte auf der Hand hat, wird der Boolean auf true gesetzt
                     if (c1.getColor() == unten.getColor() && c1.getRank() != CardRank.UNTER && c1.getRank() != CardRank.OBER) {
                         farbeVorhanden = true;
