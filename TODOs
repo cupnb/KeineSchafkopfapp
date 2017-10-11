@@ -1,1 +1,2 @@
 //TODO Fix Wenn fehlerhafter Spielmodus gewählt wird
+//TODO Idee für Scanner --> Methode, die sich selbst aufruft, wenn etwas falsches eingegeben wurde; solange wiederholen, bis etwas richtiges eingegeben wurde --> NullPointer und Mismatch entfallen!
