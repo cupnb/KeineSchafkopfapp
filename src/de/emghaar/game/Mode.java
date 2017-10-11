@@ -276,23 +276,29 @@ public class Mode {
                     switch(temporary.getRank())
                     {
                         case ZEHN: temporary.getRank().setComparison(35);
+                            break;
                         case OBER: temporary.getRank().setComparison(36);
+                            break;
                     }
+                    break;
                 case SOLOSCHELLEN:
                     if(temporary.getColor() == CardColor.SCHELLEN)
                     {
                         setComparison(temporary);
                     }
+                    break;
                 case SOLOGRAS:
                     if(temporary.getColor() == CardColor.LAUB)
                     {
                         setComparison(temporary);
                     }
+                    break;
                 case SOLOEICHEL:
                     if(temporary.getColor() == CardColor.EICHEL)
                     {
                         setComparison(temporary);
                     }
+                    break;
             }
 
         }
@@ -314,9 +320,13 @@ public class Mode {
                 switch (temporary.getColor())
                 {
                     case SCHELLEN: temporary.getRank().setComparison(71);
+                        break;
                     case HERZ: temporary.getRank().setComparison(72);
+                        break;
                     case LAUB: temporary.getRank().setComparison(73);
+                        break;
                     case EICHEL: temporary.getRank().setComparison(74);
+                        break;
                 }
             }
             if(temporary.getRank() == CardRank.OBER)
@@ -324,9 +334,13 @@ public class Mode {
                 switch (temporary.getColor())
                 {
                     case SCHELLEN: temporary.getRank().setComparison(81);
+                        break;
                     case HERZ: temporary.getRank().setComparison(82);
+                        break;
                     case LAUB: temporary.getRank().setComparison(83);
+                        break;
                     case EICHEL: temporary.getRank().setComparison(84);
+                        break;
                 }
             }
         }
@@ -370,16 +384,22 @@ public class Mode {
         switch (temporary.getRank()) {
             case SIEBEN:
                 temporary.getRank().setComparison(61);
+                break;
             case ACHT:
                 temporary.getRank().setComparison(62);
+                break;
             case NEUN:
                 temporary.getRank().setComparison(63);
+                break;
             case KOENIG:
                 temporary.getRank().setComparison(64);
+                break;
             case ZEHN:
                 temporary.getRank().setComparison(65);
+                break;
             case ASS:
                 temporary.getRank().setComparison(66);
+                break;
         }
     }
 
