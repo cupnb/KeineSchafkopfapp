@@ -325,6 +325,7 @@ public class Game {
                 }
             }
             //Karte wird zu Dump und Played hinzugefuegt
+            //TODO addgespielteKarte wird doppelt eingebaut (auch Humane Methode Kartelegen)
             addgespielteKarte(Spielkarte);
             //erste Karte wird hingelegt
             if (best == null) {

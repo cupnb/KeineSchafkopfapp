@@ -53,6 +53,7 @@ public class Mode {
 
     //spielbare Karten werden geckeckt und mit einer LinkedList
     //Methode zur anzeigen der spielbaren Karten
+    //TODO Methode ist noch nicht ganz ausgearbeitet: verschiedene Fehler --> nimmt immer die zuletzt gespielte Karte zum vergleichen
     LinkedList<Card> showPlayableCards(LinkedList<Card> c1, Stack<Card> c2, int Ruffarbe, MODE_TYPE c3)
     {
         //Karte, die im Stich ganz unten liegt

@@ -180,26 +180,11 @@ public class Human implements Player
             //Gibt spielbare Karten aus
         }
         System.out.println("Gib eine Karte ein");
-        Scanner sc = new Scanner(System.in);
-        int k;
-        try {k = sc.nextInt();}
-        catch (java.util.InputMismatchException e)
-        {
-            System.err.println(e);
 
-            k = sc.nextInt();
-        }
         System.out.println("Hand size: " + hand.size());
-        //TODO Das hier ergibt absolut keinen Sinn. Denk mal drüber nach. Null zurueckgeben ist SCHEISSE
-        if (k > hand.size()-1 || k < 0){
-            System.out.println("Error. Wert nicht möglich! Neue Eingabe");
-            k = sc.nextInt();
-        }
-        else {
-            playingCard = temp.get(k);
-            hand.remove(playingCard);
-            game.addgespielteKarte(playingCard);
-        }
+        playingCard = temp.get(scannerFortInt(temp));
+        hand.remove(playingCard);
+        game.addgespielteKarte(playingCard);
         return playingCard;
         //habe ich jetzt mal in loop() in Game gemacht -Ulli
     }
@@ -229,5 +214,26 @@ public class Human implements Player
 
     public void giveNumber(int n) {
         System.out.println("Du bis Spieler Nummer " +n+1);
+    }
+
+    private int scannerFortInt(LinkedList<Card> c1)
+    {
+        Scanner sc = new Scanner(System.in);
+        int k;
+        try {k = sc.nextInt();}
+        catch (java.util.InputMismatchException | NullPointerException  e)
+        {
+            System.err.println(e);
+            System.out.println("Error. Wert nicht möglich! Neue Eingabe");
+            return scannerFortInt(c1);
+        }
+        try {c1.get(k);}
+        catch (IndexOutOfBoundsException e)
+        {
+            System.err.println(e);
+            System.out.println("Error. Wert nicht möglich! Neue Eingabe");
+            return scannerFortInt(c1);
+        }
+        return k;
     }
 }
