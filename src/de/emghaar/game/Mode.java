@@ -69,7 +69,7 @@ public class Mode {
             temporaryArray[j-1]= c1.removeFirst();
         }
         //LinkedList die am Ende zurückgegeben wird
-        LinkedList<Card> giveBack = new LinkedList<>();
+        LinkedList<Card> giveBack = new LinkedList<Card>();
         //Alle Karten im Array werden geprüft
         for(int i=temporaryArray.length; i>0; i--)
         {
