@@ -53,6 +53,7 @@ public class Mode {
 
     //spielbare Karten werden geckeckt und mit einer LinkedList
     //Methode zur anzeigen der spielbaren Karten
+    //TODO Methode ist noch nicht ganz ausgearbeitet: verschiedene Fehler --> nimmt immer die zuletzt gespielte Karte zum vergleichen
     LinkedList<Card> showPlayableCards(LinkedList<Card> c1, Stack<Card> c2, int Ruffarbe, MODE_TYPE c3)
     {
         //Karte, die im Stich ganz unten liegt
@@ -226,7 +227,7 @@ public class Mode {
                 //Boolean, der auf true gesetzt wird, sobald der Player eine Farbkarte der zuerst gespielten Karte hat
                 boolean farbeVorhanden = false;
                 //Durchlaufen des Feldes zum Suchen einer Farbkarte der zuerst gespielten Karte
-                for (int i = 0; i < c3.length; i--) {
+                for (int i = 0; i < c3.length; i++) {
                     //Wenn der Spieler eine weitere Farbkarte auf der Hand hat, wird der Boolean auf true gesetzt
                     if (c1.getColor() == unten.getColor() && c1.getRank() != CardRank.UNTER && c1.getRank() != CardRank.OBER) {
                         farbeVorhanden = true;
@@ -276,23 +277,29 @@ public class Mode {
                     switch(temporary.getRank())
                     {
                         case ZEHN: temporary.getRank().setComparison(35);
+                            break;
                         case OBER: temporary.getRank().setComparison(36);
+                            break;
                     }
+                    break;
                 case SOLOSCHELLEN:
                     if(temporary.getColor() == CardColor.SCHELLEN)
                     {
                         setComparison(temporary);
                     }
+                    break;
                 case SOLOGRAS:
                     if(temporary.getColor() == CardColor.LAUB)
                     {
                         setComparison(temporary);
                     }
+                    break;
                 case SOLOEICHEL:
                     if(temporary.getColor() == CardColor.EICHEL)
                     {
                         setComparison(temporary);
                     }
+                    break;
             }
 
         }
@@ -314,9 +321,13 @@ public class Mode {
                 switch (temporary.getColor())
                 {
                     case SCHELLEN: temporary.getRank().setComparison(71);
+                        break;
                     case HERZ: temporary.getRank().setComparison(72);
+                        break;
                     case LAUB: temporary.getRank().setComparison(73);
+                        break;
                     case EICHEL: temporary.getRank().setComparison(74);
+                        break;
                 }
             }
             if(temporary.getRank() == CardRank.OBER)
@@ -324,9 +335,13 @@ public class Mode {
                 switch (temporary.getColor())
                 {
                     case SCHELLEN: temporary.getRank().setComparison(81);
+                        break;
                     case HERZ: temporary.getRank().setComparison(82);
+                        break;
                     case LAUB: temporary.getRank().setComparison(83);
+                        break;
                     case EICHEL: temporary.getRank().setComparison(84);
+                        break;
                 }
             }
         }
@@ -370,16 +385,22 @@ public class Mode {
         switch (temporary.getRank()) {
             case SIEBEN:
                 temporary.getRank().setComparison(61);
+                break;
             case ACHT:
                 temporary.getRank().setComparison(62);
+                break;
             case NEUN:
                 temporary.getRank().setComparison(63);
+                break;
             case KOENIG:
                 temporary.getRank().setComparison(64);
+                break;
             case ZEHN:
                 temporary.getRank().setComparison(65);
+                break;
             case ASS:
                 temporary.getRank().setComparison(66);
+                break;
         }
     }
 

@@ -287,7 +287,7 @@ public class Game {
 
         //Aufruf der Methode loop fuehrt 8 Stiche durch
         for (int i = 0; i < 8; i++) {
-            loop();
+                loop();
         }
 
         //Geber wird um eins erhoeht (ganz am Ende von initialize einbauen)
@@ -315,6 +315,7 @@ public class Game {
         for (int x = 0; x < 4; x++) {
             //players[turnState.ordinal()].yourTurn();
             Card Spielkarte = players[(dealer + 1 + x) % 4].kartelegen();
+            System.out.println(Spielkarte.getColor().getName() + " Wert: " + Spielkarte.getRank().getName());
             //matrix wird mit der jeweiligen Karte befuellt
             matrix[(dealer + 1 + x) % 4][playedStiche - 1] = Spielkarte;
             //uebergeben der aktualisierten Matrix an die Player, wenn der Player ein Bot ist
@@ -324,6 +325,7 @@ public class Game {
                 }
             }
             //Karte wird zu Dump und Played hinzugefuegt
+            //TODO addgespielteKarte wird doppelt eingebaut (auch Humane Methode Kartelegen)
             addgespielteKarte(Spielkarte);
             //erste Karte wird hingelegt
             if (best == null) {
@@ -489,7 +491,7 @@ public class Game {
                     anzahlSpielenWollen = anzahlSpielenWollen + 1;
                     System.out.println("spielenWill TRUE");
                 } else {
-                    willSpieler[i] = false;
+                    willSpieler[(auswaehler + i) % 4] = false;
                     System.out.println("spielenWill FALSE");
                 }
 

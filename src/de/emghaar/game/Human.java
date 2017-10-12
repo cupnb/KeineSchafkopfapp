@@ -26,13 +26,10 @@ public class Human implements Player
     private Stack<Card> stiche;
     //Anzahl der Stiche zur Auszählung
     private int stichanzahl;
-    //Listenlänge von der Hamd
-    private int laenge;
 
     //Konstruktor der Klasse Player
     public Human(String name)
     {
-        laenge = 8;
         this.name = name;
         wannaplay = false;
         game = null;
@@ -117,9 +114,15 @@ public class Human implements Player
     //setter Methode von wannaplay
     public int setWannaplay()
     {
-        System.out.println("Spielst du?");
+        System.out.println("Spielst du, " + name + "?");
         Scanner sca = new Scanner(System.in);
-        int k = sca.nextInt();
+        int k;
+        try {k = sca.nextInt();}
+        catch (java.util.InputMismatchException e)
+        {
+            System.err.println("Unerlaubter Wert, nochmal versuchen...");
+            return setWannaplay();
+        }
         if (k == 1)
         {
             wannaplay = true;
@@ -143,7 +146,7 @@ public class Human implements Player
 
         //darf nur gemacht werden, wenn wannaplay true ist
         if (wannaplay) {
-            System.out.println("Was spielst du? 1 - 3 Sauspiele S G E, 4 Wenz, 5 - 8 Solo S G E H");
+            System.out.println("Was spielst du, " + name + "? 1 - 3 Sauspiele S G E, 4 Wenz, 5 - 8 Solo S G E H");
             Scanner scan = new Scanner(System.in);
             int l = scan.nextInt();
             switch (l){
@@ -170,26 +173,18 @@ public class Human implements Player
         Card playingCard = null;
         Mode m = game.getMode();
         LinkedList<Card> temp = m.showPlayableCards((LinkedList<Card>) hand.clone(), game.getDump(), game.getCallingColor(), game.getMode().getModeType());
-        System.out.println("Du hast die Karten : ");
+        System.out.println(name + ", du hast die Karten : ");
         for (Card karte: temp)
         {
             System.out.println(karte.getColor() + " mit Wert " + karte.getRank());
             //Gibt spielbare Karten aus
         }
         System.out.println("Gib eine Karte ein");
-        Scanner sc = new Scanner(System.in);
-        int k = sc.nextInt();
-        System.out.println(hand.size());
-        if (k > laenge || k < 1){
-            System.out.println("Error. Wert nicht möglich! Neue Eingabe");
-            k = sc.nextInt();
-        }
-        else {
-            playingCard = hand.get(k);
-            hand.remove(k);
-            game.addgespielteKarte(playingCard);
-            laenge = laenge - 1;
-        }
+
+        System.out.println("Hand size: " + hand.size());
+        playingCard = temp.get(scannerFortInt(temp));
+        hand.remove(playingCard);
+        game.addgespielteKarte(playingCard);
         return playingCard;
         //habe ich jetzt mal in loop() in Game gemacht -Ulli
     }
@@ -219,5 +214,26 @@ public class Human implements Player
 
     public void giveNumber(int n) {
         System.out.println("Du bis Spieler Nummer " +n+1);
+    }
+
+    private int scannerFortInt(LinkedList<Card> c1)
+    {
+        Scanner sc = new Scanner(System.in);
+        int k;
+        try {k = sc.nextInt();}
+        catch (java.util.InputMismatchException | NullPointerException  e)
+        {
+            System.err.println(e);
+            System.out.println("Error. Wert nicht möglich! Neue Eingabe");
+            return scannerFortInt(c1);
+        }
+        try {c1.get(k);}
+        catch (IndexOutOfBoundsException e)
+        {
+            System.err.println(e);
+            System.out.println("Error. Wert nicht möglich! Neue Eingabe");
+            return scannerFortInt(c1);
+        }
+        return k;
     }
 }
