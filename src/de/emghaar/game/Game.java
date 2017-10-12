@@ -113,8 +113,7 @@ public class Game {
         //anzahlSpielenWollen wird zurueckgesetzt
         anzahlSpielenWollen = 0;
         //Deck wird gemischt
-        if (roundnumber != 1)
-        {
+        if (roundnumber != 1) {
             deck.initialize(dump);
         }
         //Dump wird geleert am Anfang der Runde
@@ -128,17 +127,15 @@ public class Game {
             }
         }
         System.out.println(" ----- Die Karten der Spieler werden ausgegeben -----");
-        for(int l = 0; l<4; l++)
-        {
+        for (int l = 0; l < 4; l++) {
             for (Card karte : players[l].getHand()) {
-                System.out.println("Spieler " + players[l].getName() +" : " +karte.getColor() + " mit Wert " + karte.getRank());
+                System.out.println("Spieler " + players[l].getName() + " : " + karte.getColor() + " mit Wert " + karte.getRank());
                 //Gibt Karten aus
             }
             System.out.println("");
         }
 
-        for(int o = 0; o<4; o++)
-        {
+        for (int o = 0; o < 4; o++) {
             players[o].giveNumber(o);
         }
 
@@ -158,13 +155,11 @@ public class Game {
                 if (willSpieler[p]) {
                     mode.setModeType(players[p].play());
                     //es wird nachgeprueft, ob der Spieler mit seiner Hand spielen darf --> Sauspiel darf nur ohne die Rufass gespielt werden
-                    if (mode.SauSpielSpielbar(players[p].getHand(), mode))
-                    {
+                    if (mode.SauSpielSpielbar(players[p].getHand(), mode)) {
                         endgueltigerPlayer = p;
                     }
                     //Sonst wird nochmal abgefragt, wer spielen will und diese Prozedere von vorne angefangen (p ist der Spieler, der es nicht hinbekommen hat einen richtigen Mode zu waehlen)
-                    else
-                    {
+                    else {
                         mode.setModeType(NICHTS);
                         willSpieler = spielenWill(p);
                     }
@@ -176,12 +171,9 @@ public class Game {
             System.out.println("2-4 Spieler wollen spielen. Sein Spielmodus wird uebernommen");
             //Modes der Spieler, die spielen wollen werden aufgenommen in das Mode Array
             for (int i = 0; i < 4; i++) {
-                if(willSpieler[i])
-                {
+                if (willSpieler[i]) {
                     modefeld[i] = players[(dealer + 1 + i) % 4].play();
-                }
-                else
-                {
+                } else {
                     modefeld[i] = NICHTS;
                 }
             }
@@ -210,95 +202,97 @@ public class Game {
             mode.setModeType(RAMSCH);
         }
 
-        if (endgueltigerPlayer  == 0 || endgueltigerPlayer == 1 || endgueltigerPlayer == 2 || endgueltigerPlayer == 3) {
+        if (endgueltigerPlayer == 0 || endgueltigerPlayer == 1 || endgueltigerPlayer == 2 || endgueltigerPlayer == 3) {
             //Spieler wird gesetzt
             players[endgueltigerPlayer].setPlayer(true);
-            System.out.println("Spieler " +players[endgueltigerPlayer].getName() +" spielt");
+            System.out.println("Spieler " + players[endgueltigerPlayer].getName() + " spielt");
         }
-        //TODO das reicht auch einmal
-        for (int e = 0; e<4; e++)
+
         {
-            players[e].giveSpielender(endgueltigerPlayer);
-        }
-        //Hilfsvariable
-        int now;
-        //Mitspieler wird gesucht
-        switch (mode.getModeType())
-        {
-            case SAUSPIELEICHEL:
-                now = sucheKarte(players[0].getHand(), players[1].getHand(), players[2].getHand(), players[3].getHand(), CardRank.ASS, CardColor.EICHEL);
-                players[now].setPlayer(true);
-                setCallingColor(3);
-                System.out.println("Zusammen mit " + players[now].getName() );
-                break;
-            case SAUSPIELSCHELLEN:
-                now = sucheKarte(players[0].getHand(), players[1].getHand(), players[2].getHand(), players[3].getHand(), CardRank.ASS, CardColor.SCHELLEN);
-                players[now].setPlayer(true);
-                setCallingColor(1);
-                System.out.println("Zusammen mit " +players[now].getName() );
-                break;
-            case SAUSPIELGRAS:
-                now = sucheKarte(players[0].getHand(), players[1].getHand(), players[2].getHand(), players[3].getHand(), CardRank.ASS, CardColor.LAUB);
-                players[now].setPlayer(true);
-                setCallingColor(2);
-                System.out.println("Zusammen mit " +players[now].getName() );
-                break;
-            //Kontrollfunktion, falls der Mode nicht ausgewaehlt werden konnte
-            case NICHTS:
-                mode.setModeType(RAMSCH);
-                System.err.println("Kein Spielmodus ausgwaehlt. Ramsch wurde als Spielmodus gesetzt");
-        }
+            players[0].giveSpielender(endgueltigerPlayer);
 
-        //Trumpfcolor wird aufgrund des Modes ferstgelegt
+            //Hilfsvariable
+            int now;
+            //Mitspieler wird gesucht
+            switch (mode.getModeType()) {
+                case SAUSPIELEICHEL:
+                    now = sucheKarte(players[0].getHand(), players[1].getHand(), players[2].getHand(), players[3].getHand(), CardRank.ASS, CardColor.EICHEL);
+                    players[now].setPlayer(true);
+                    setCallingColor(3);
+                    System.out.println("Zusammen mit " + players[now].getName());
+                    break;
+                case SAUSPIELSCHELLEN:
+                    now = sucheKarte(players[0].getHand(), players[1].getHand(), players[2].getHand(), players[3].getHand(), CardRank.ASS, CardColor.SCHELLEN);
+                    players[now].setPlayer(true);
+                    setCallingColor(1);
+                    System.out.println("Zusammen mit " + players[now].getName());
+                    break;
+                case SAUSPIELGRAS:
+                    now = sucheKarte(players[0].getHand(), players[1].getHand(), players[2].getHand(), players[3].getHand(), CardRank.ASS, CardColor.LAUB);
+                    players[now].setPlayer(true);
+                    setCallingColor(2);
+                    System.out.println("Zusammen mit " + players[now].getName());
+                    break;
+                //Kontrollfunktion, falls der Mode nicht ausgewaehlt werden konnte
+                case NICHTS:
+                    mode.setModeType(RAMSCH);
+                    System.err.println("Kein Spielmodus ausgwaehlt. Ramsch wurde als Spielmodus gesetzt");
+            }
 
-        switch (mode.getModeType())
-        {
-            case SOLOGRAS: mode.setTrumpfcolor(3);
-            case SOLOEICHEL: mode.setTrumpfcolor(4);
-            case SOLOSCHELLEN: mode.setTrumpfcolor(1);
-            case WENZ: mode.setTrumpfcolor(0);
-        }
+            //Trumpfcolor wird aufgrund des Modes ferstgelegt
 
-        //Vergleichswerte fuer Ober und Unter werden angepasst (z.B. Eichel Ober ist ueber Schellen Ober)
-        for (int a = 0; a < 4; a++) {
-            mode.comparisonOberUnter(players[a].getHand());
-        }
+            switch (mode.getModeType()) {
+                case SOLOGRAS:
+                    mode.setTrumpfcolor(3);
+                case SOLOEICHEL:
+                    mode.setTrumpfcolor(4);
+                case SOLOSCHELLEN:
+                    mode.setTrumpfcolor(1);
+                case WENZ:
+                    mode.setTrumpfcolor(0);
+            }
 
-        //Vergleichswerte der Trumpfarbe werden angepasst (solange es nicht Herz ist) bzw. die Vergleichswerte werden fuer einen Wenz angepasst
-        if (mode.getTrumpfcolor() == 0 || mode.getTrumpfcolor() == 1 || mode.getTrumpfcolor() == 3 || mode.getTrumpfcolor() == 4) {
+            //Vergleichswerte fuer Ober und Unter werden angepasst (z.B. Eichel Ober ist ueber Schellen Ober)
+            for (int a = 0; a < 4; a++) {
+                mode.comparisonOberUnter(players[a].getHand());
+            }
 
+            //Vergleichswerte der Trumpfarbe werden angepasst (solange es nicht Herz ist) bzw. die Vergleichswerte werden fuer einen Wenz angepasst
+            if (mode.getTrumpfcolor() == 0 || mode.getTrumpfcolor() == 1 || mode.getTrumpfcolor() == 3 || mode.getTrumpfcolor() == 4) {
+
+                for (int b = 0; b < 4; b++) {
+                    mode.comparisonAktualisieren(players[b].getHand(), mode.getModeType());
+                }
+            }
+
+            //Vergleichswerte von Herz werden erhöht, wenn Herz Trumpffarbe ist
+            if (mode.getTrumpfcolor() == 2) {
+                for (int s = 0; s < 4; s++) {
+                    mode.comparisonSetStandard(players[s].getHand());
+                }
+
+            }
+
+            //Mode wird an die Spieler bzw. Bots uebergeben
             for (int b = 0; b < 4; b++) {
-                mode.comparisonAktualisieren(players[b].getHand(), mode.getModeType());
-            }
-        }
-
-        //Vergleichswerte von Herz werden erhöht, wenn Herz Trumpffarbe ist
-        if (mode.getTrumpfcolor() == 2) {
-            for (int s = 0; s < 4; s++) {
-                mode.comparisonSetStandard(players[s].getHand());
+                players[b].giveMode(mode.getModeType());
             }
 
-        }
-
-        //Mode wird an die Spieler bzw. Bots uebergeben
-        for(int b = 0; b<4; b++) {
-            players[b].giveMode(mode.getModeType());
-        }
-
-        //Aufruf der Methode loop fuehrt 8 Stiche durch
-        for (int i = 0; i < 8; i++) {
+            //Aufruf der Methode loop fuehrt 8 Stiche durch
+            for (int i = 0; i < 8; i++) {
                 loop();
-        }
+            }
 
-        //Geber wird um eins erhoeht (ganz am Ende von initialize einbauen)
-        if (dealer == 3) {
-            dealer = 0;
-        } else {
-            dealer = dealer++;
-        }
+            //Geber wird um eins erhoeht (ganz am Ende von initialize einbauen)
+            if (dealer == 3) {
+                dealer = 0;
+            } else {
+                dealer = dealer++;
+            }
 
-        //Auszaehlen der Punkte und Bekanntmachung des Gewinners
-        ende();
+            //Auszaehlen der Punkte und Bekanntmachung des Gewinners
+            ende();
+        }
     }
 
     //Methode fuer einen Stich
@@ -325,7 +319,7 @@ public class Game {
                 }
             }
             //Karte wird zu Dump und Played hinzugefuegt
-            //TODO addgespielteKarte wird doppelt eingebaut (auch Humane Methode Kartelegen)
+            //TODO addgespielteKarte wird doppelt eingebaut (auch Humane Methode Kartelegen) (habs mal auskommentiert. Sollte also passen. Bei Problemen (warum eigentlich?) in player wieder einfuegen -NB)
             addgespielteKarte(Spielkarte);
             //erste Karte wird hingelegt
             if (best == null) {
@@ -520,7 +514,6 @@ public class Game {
             }
         }
         System.out.println("spielenWill abgeschlossen");
-        //TODO Hier darf nicht immer wieder neu
         return willSpieler;
     }
 }

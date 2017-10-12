@@ -123,19 +123,12 @@ public class Human implements Player
             System.err.println("Unerlaubter Wert, nochmal versuchen...");
             return setWannaplay();
         }
-        if (k == 1)
-        {
-            wannaplay = true;
-        }
-        else if (k == 0)
-        {
-            wannaplay = false;
-        }
-        else
+        if (k != 1|k != 0)
         {
             System.out.println("Error. Tippe 1 für Spiel oder 0 für nicht spielen");
             return setWannaplay();
         }
+        wannaplay = k==1;
         return k;
     }
 
@@ -184,7 +177,7 @@ public class Human implements Player
         System.out.println("Hand size: " + hand.size());
         playingCard = temp.get(scannerFortInt(temp));
         hand.remove(playingCard);
-        game.addgespielteKarte(playingCard);
+        //game.addgespielteKarte(playingCard); Testweise auskommentiert, siehe _TODO
         return playingCard;
         //habe ich jetzt mal in loop() in Game gemacht -Ulli
     }
@@ -209,11 +202,11 @@ public class Human implements Player
     }
 
     public void giveSpielender(int p) {
-        System.out.println("Der Spieler " +p+1 +" spielt");
+        System.out.println("Der Spieler " + (p+1) +" spielt");
     }
 
     public void giveNumber(int n) {
-        System.out.println("Du bis Spieler Nummer " +n+1);
+        System.out.println("Du bis Spieler Nummer " + (n+1));
     }
 
     private int scannerFortInt(LinkedList<Card> c1)
