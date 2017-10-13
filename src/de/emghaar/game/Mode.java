@@ -59,6 +59,7 @@ public class Mode {
         //Karte, die im Stich ganz unten liegt
         Card unten = null;
         //unterste Karte wird durch pop() vom Stack geholt
+        //TODO c2 enspricht immer Dump. Da Dump aber immer alle Karten der Spielrunde nimmt, wird die allerallerallererste Karte des Stiches genommen. Sobald der zweite Stich kommt, geht diese Taktik nicht mehr auf
         if(!c2.empty()) {
             unten = c2.lastElement();
         }
