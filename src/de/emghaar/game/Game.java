@@ -3,15 +3,19 @@ package de.emghaar.game;
 import java.util.LinkedList;
 import java.util.Random;
 import java.util.Stack;
+import java.util.Observable;
+
+import de.emghaar.ButtonAction;
 import de.emghaar.game.card.Card;
 import de.emghaar.game.card.CardColor;
 import de.emghaar.game.card.CardRank;
 
 import static de.emghaar.game.Mode.MODE_TYPE.NICHTS;
 import static de.emghaar.game.Mode.MODE_TYPE.RAMSCH;
+
 //TODO Zum Laufen bringen
 //Hauptklasse, die alles steuert, und ueber die das Game hauptsaechlich laeuft --> Vergleiche typisches Schafkopfspiel
-public class Game {
+public class Game extends Observable {
 
     //Feld fuer die Spieler; 4 Spieler werden dem Feld im Konstruktor zugewiesen
     private Player[] players;
@@ -78,12 +82,10 @@ public class Game {
         roundnumber = 0;
         anzahlSpielenWollen = 0;
         System.out.println("Konstruktor fertig abgeschlossen");
-        initialize();
     }
 
 
-    Mode getMode()
-    {
+    Mode getMode() {
         return mode;
     }
 
@@ -93,8 +95,7 @@ public class Game {
         played.add(f);
     }
 
-    Stack getDump()
-    {
+    Stack getDump() {
         return dump;
     }
 
@@ -355,28 +356,28 @@ public class Game {
     private int sucheKarte(LinkedList<Card> c1, LinkedList<Card> c2, LinkedList<Card> c3, LinkedList<Card> c4, CardRank gesuchtRank, CardColor gesuchtColor) {
 
         //1. Liste wird durchsucht
-        for (Card karte:c1) {
+        for (Card karte : c1) {
             if (karte.getColor() == gesuchtColor && karte.getRank() == gesuchtRank) {
                 return 0;
             }
         }
 
         //2. Liste wird durchsucht
-        for (Card karte:c2) {
+        for (Card karte : c2) {
             if (karte.getColor() == gesuchtColor && karte.getRank() == gesuchtRank) {
                 return 1;
             }
         }
 
         //3. Liste wird durchsucht
-        for (Card karte:c3) {
+        for (Card karte : c3) {
             if (karte.getColor() == gesuchtColor && karte.getRank() == gesuchtRank) {
                 return 2;
             }
         }
 
         //4. Liste wird durchsucht
-        for (Card karte:c4) {
+        for (Card karte : c4) {
             if (karte.getColor() == gesuchtColor && karte.getRank() == gesuchtRank) {
                 return 3;
             }
@@ -439,8 +440,7 @@ public class Game {
             }
 
             //Auswertung der Punktzahl
-            if (mode.getModeType() != Mode.MODE_TYPE.SOLOEICHEL || mode.getModeType() != Mode.MODE_TYPE.SOLOGRAS || mode.getModeType() != Mode.MODE_TYPE.SOLOSCHELLEN)
-            {
+            if (mode.getModeType() != Mode.MODE_TYPE.SOLOEICHEL || mode.getModeType() != Mode.MODE_TYPE.SOLOGRAS || mode.getModeType() != Mode.MODE_TYPE.SOLOSCHELLEN) {
                 if (punktePlayer <= punkteNotPlayer) {
                     //Bekanntmachung, dass die NIcht-Spieler gewonnen haben
                     System.out.println(notplayerspp[0].getName() + " und " + notplayerspp[1].getName() + " haben gewonnen!");
@@ -449,22 +449,19 @@ public class Game {
                     System.out.println(playerspp[0].getName() + " und " + playerspp[1] + " haben gewonnen!");
                 }
 
-            }
-            else
-            {
+            } else {
                 if (punktePlayer <= punkteNotPlayer) {
                     //Bekanntmachung, dass die NIcht-Spieler gewonnen haben
-                    System.out.println(notplayerspp[0].getName() + " und " + notplayerspp[1] +" und " + notplayerspp[2].getName() + " haben gewonnen!");
+                    System.out.println(notplayerspp[0].getName() + " und " + notplayerspp[1] + " und " + notplayerspp[2].getName() + " haben gewonnen!");
                 } else {
                     //Bekanntmachung, dass der Spieler gewonnen haben
-                    System.out.println(playerspp[0].getName() +  " hat gewonnen!");
+                    System.out.println(playerspp[0].getName() + " hat gewonnen!");
                 }
             }
         }
     }
 
-    private boolean[] spielenWill(int x)
-    {
+    private boolean[] spielenWill(int x) {
         //int x zum Abfragen, ob ein Spieler einen Fehler beim Eingeben eines Spielmodus gemacht hat
         //wenn ja --> darf nicht mehr an der naechsten Fragerunde teilnehmen
         //Standardwert, wenn noch keine Frageunde vorbei ist = 4
@@ -476,7 +473,7 @@ public class Game {
         boolean[] willSpieler = new boolean[4];
 
         //Erste Runde fuer Standardwert = 4
-        if(x == 4) {
+        if (x == 4) {
             //for: Abfrage wer spielen will --> True setzen des jeweiligen Indexes
             for (int i = 0; i < 4; i++) {
                 if (players[(auswaehler + i) % 4].setWannaplay() != 0) {
@@ -492,15 +489,12 @@ public class Game {
             }
         }
         //Else fuer die zweiten Fragerunden
-        else
-        {
+        else {
             //Alle vier Spieler werden abgefragt, ob sie spielen wollen mithilfe von for
-            for (int i = 0; i < 4; i++)
-            {
+            for (int i = 0; i < 4; i++) {
                 //Wenn der Spieler keine Fehler gemacht hat beim Auswaehlen des Spiels, wird er ganz normal gefragt
                 //Sonst passiert gar nichts
-                if (i != x)
-                {
+                if (i != x) {
                     if (players[(auswaehler + i) % 4].setWannaplay() != 0) {
                         willSpieler[i] = true;
                         //Anzahl der Personen, die spielen wollen wird um 1 erhöht
@@ -515,5 +509,9 @@ public class Game {
         }
         System.out.println("spielenWill abgeschlossen");
         return willSpieler;
+    }
+
+    public void buttonPressed(ButtonAction b) {
+
     }
 }

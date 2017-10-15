@@ -37,13 +37,13 @@ class Deck {
         int kartenRaus = x.nextInt(15) + 5;
         Random y = new Random();
         int kartenzahlStart = y.nextInt(31) - kartenRaus;
-        for (int i = 0;i < kartenzahlStart; i++) {
+        for (int i = 0; i < kartenzahlStart; i++) {
             shuffleList.add(i, prevDumpedCards.pop());
         }
         for (int j = 0; j < kartenRaus; j++) {
-            shuffleList2.add(j,prevDumpedCards.pop());
+            shuffleList2.add(j, prevDumpedCards.pop());
         }
-        for (int k = 0; k < 32-kartenRaus; k++) {
+        for (int k = 0; k < 32 - kartenRaus; k++) {
             shuffleList.add(kartenzahlStart + k, prevDumpedCards.pop());
         }
         for (int l = 0; l < kartenRaus; l++) {
