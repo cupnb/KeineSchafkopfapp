@@ -499,7 +499,7 @@ public class Game {
             {
                 //Wenn der Spieler keine Fehler gemacht hat beim Auswaehlen des Spiels, wird er ganz normal gefragt
                 //Sonst passiert gar nichts
-                if (i != x)
+                if (i != (x-1))
                 {
                     if (players[(auswaehler + i) % 4].setWannaplay() != 0) {
                         willSpieler[i] = true;

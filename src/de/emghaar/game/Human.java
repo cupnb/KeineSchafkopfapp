@@ -123,12 +123,15 @@ public class Human implements Player
             System.err.println("Unerlaubter Wert, nochmal versuchen...");
             return setWannaplay();
         }
-        if (k != 1|k != 0)
+        if (k==1)
+        {
+            wannaplay = true;
+        }
+        else if (k != 0)
         {
             System.out.println("Error. Tippe 1 für Spiel oder 0 für nicht spielen");
             return setWannaplay();
         }
-        wannaplay = k==1;
         return k;
     }
 
