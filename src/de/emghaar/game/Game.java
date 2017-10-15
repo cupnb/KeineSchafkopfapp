@@ -9,6 +9,14 @@ import de.emghaar.game.card.CardRank;
 
 import static de.emghaar.game.Mode.MODE_TYPE.NICHTS;
 import static de.emghaar.game.Mode.MODE_TYPE.RAMSCH;
+
+/**
+ * Klasse, die die komplette Spiellogik beinhaltet.
+ *
+ * Hier wird alles, was man braucht initialisiert und erstellt. Die Klasse wird in der Main Klasse aufgerufen
+ *
+ * @author Alex Ullrich, Noah Boeckmann, Lukas Dröse
+ */
 //TODO Zum Laufen bringen
 //Hauptklasse, die alles steuert, und ueber die das Game hauptsaechlich laeuft --> Vergleiche typisches Schafkopfspiel
 public class Game {
@@ -41,6 +49,21 @@ public class Game {
     //Anzahl der SPieler, die selbst spielen wollen
     private int anzahlSpielenWollen;
 
+    /**
+     * Konstruktor der Klasse Game
+     *
+     * - Initialisierung des Arrays für die Spieler
+     * - Mode wird auf NICHTS gesetzt
+     * - Spielern wird das Game zugesetzt
+     * - alle notwendigen weiteren Variablen werden initialisiert
+     *
+     * @author Alex Ullrich
+     *
+     * @param p0 Erster Spieler des Spiels. Er ist in der ersten Runde der "Ausgeber" der Karten
+     * @param p1 Zweiter Spieler des Spiels. Er ist in der ersten Runde der Spieler, der zuerst gefragt wird, ob er spielen möchte
+     * @param p2 Dritter Spieler des Spiels
+     * @param p3 Vierter Spieler des Spiels
+     */
     public Game(Human p0, Human p1, Human p2, Human p3) {
         //Random Zahl zur Bestimmung des Dealers in der ersten Runde
         Random rnd = new Random();
@@ -87,17 +110,42 @@ public class Game {
         return mode;
     }
 
-    //Fuegt eine gespielte Karte zu dump und played hinzu
-    void addgespielteKarte(Card f) {
+    /**
+     * Fügt die Karte zu Dump (Stack zum Mischen des Feldes), sowie Played (Stack zum gespielten Stich) hinzu
+     *
+     * @author Lukas Dröse
+     * @param f Karte, die zu einem Stich hinzugefuegt werden soll
+     */
+    private void addgespielteKarte(Card f) {
         dump.add(f);
         played.add(f);
     }
 
+    /**
+     * Getter Methode für Dump
+     *
+     * @author Lukas Dröse
+     * @return Gibt den Stack Dump zurück
+     */
     Stack getDump()
     {
         return dump;
     }
 
+    /**
+     * Methode, die immer am Anfang eines Games aufgerufen wird
+     *
+     * - Wichtige Variablen werden auf ihren Standardwert zurückgesetzt
+     * - Karten werden an die Spieler ausgegeben
+     * - Auswahlverfahren für den Spielmodus des jeweiligen Spiels
+     * - bei Sauspielen: Mitspieler des Spielers wird gesucht
+     * - Comparisonwerte für Karten werden angepasst
+     * - Methode loop() wird aufgerufen
+     * - dealer wird um 1 erhoeht für die naechste Runde
+     * - Methode ende() wird aufgerufen
+     *
+     * @author Noch Boeckmann, Alex Ullrich
+     */
     private void initialize() {
         System.out.println("Methode initialize aufgerufen");
         //Ruffarbe wird zurueckgesetzt
@@ -135,6 +183,7 @@ public class Game {
             System.out.println("");
         }
 
+        //Spielern wird ihre Spielnummer uebergeben
         for (int o = 0; o < 4; o++) {
             players[o].giveNumber(o);
         }
@@ -295,6 +344,18 @@ public class Game {
         }
     }
 
+    /**
+     * Methode, die einen Stich durchspielt
+     *
+     * - Standardwerte für Variablen werden gesetzt
+     * - Spieler werden nach dem Legen einer Karte gefragt
+     * - Matrix für den Bot wird befuellt und uebergeben
+     * - addgespieleteKarte() wird aufgerufen --> Karte wird zum Stich hinzugefuegt
+     * - Comparisonwerte werden verglichen um die hoechste Karte im Stich zu finden
+     * - Spieler, der den Stich bekommt wird er zugeordnet
+     *
+     *  @author Noah Boeckmann, Alex Ullrich
+     */
     //Methode fuer einen Stich
     private void loop() {
         //Stack mit dem Karten des letzten Stichs werden geleert
@@ -351,6 +412,22 @@ public class Game {
 
     }
 
+    /**
+     * Methode, die verwendet wird um eine bestimmte Karte in einer Hand zu finden
+     *
+     * Benutzung: Mitspieler bei Sauspiel wird ermittelt
+     *
+     * @author Alex Ullrich
+     *
+     * @param c1 Hand des ersten Spielers
+     * @param c2 Hand des zweiten Spielers
+     * @param c3 Hand des dritten Spielers
+     * @param c4 Hand des vierten Spielers
+     * @param gesuchtRank Rank der gesuchten Karte
+     * @param gesuchtColor Farbe der gesuchten Karte
+     *
+     * @return Zahl des Spielers, der die Karte besitzt wird zurueckgegeben
+     */
     //Suche nach einer bestimmten Karte aufgrund von 4 Listen und dem/der CardRank/CardColor
     private int sucheKarte(LinkedList<Card> c1, LinkedList<Card> c2, LinkedList<Card> c3, LinkedList<Card> c4, CardRank gesuchtRank, CardColor gesuchtColor) {
 
@@ -385,16 +462,40 @@ public class Game {
         return -1;
     }
 
+    /**
+     * Getter Methode von callingColor
+     *
+     * @author Alex Ullrich
+     *
+     * @return Zahl der Spielfarbe
+     */
     //getter Methode
     int getCallingColor() {
         return callingColor;
     }
 
+    /**
+     * Setter Methode von callingColor
+     *
+     * @author Alex Ullrich
+     *
+     * @param x Wert, der als callingColor gesetzt werden soll
+     */
     //setter Methode
     private void setCallingColor(int x) {
         callingColor = x;
     }
 
+    /**
+     * Methode, die am Ende eines Spiels aufgerufen wird
+     *
+     * - Initialisierung der noetigen Variablen
+     * - Unterscheidung zwischen Ramsch und aneren Spielmodi
+     * - Punkte der Spieler werden ausgezaehlt
+     * - Gewinner wird bekannt gegeben
+     *
+     * @author Lukas Dröse, Alex Ullrich
+     */
     //Methode, die am Ende aufgerufen wird
     private void ende() {
         //Punkte der Spieler
@@ -463,6 +564,18 @@ public class Game {
         }
     }
 
+    /**
+     * Methode, die aufgerufen wird in initialize() und schaut, ob ein Spieler spielen moechte oder nicht
+     *
+     * - nötige Variablen werden initialisiert
+     * - Spieler werden durch setWannaplay() nacheinander gefragt
+     * - wenn x!=4, dann werden alle Spieler bis auf Spieler x gefragt (Spieler x hat bei einer vorherigen Frage einen Fehler beim Auswaehlen gemacht)
+     *
+     * @author Noah Boeckmann, Alex Ullrich
+     *
+     * @param x Zahl eines Spielers, der davor einen fehler gemacht hat --> wenn 4, dann hat keiner einen Fehler gemacht
+     * @return Array, der entweder true für spielen bzw. false für nichtspielen beinhaltet
+     */
     private boolean[] spielenWill(int x)
     {
         //int x zum Abfragen, ob ein Spieler einen Fehler beim Eingeben eines Spielmodus gemacht hat
