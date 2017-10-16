@@ -102,7 +102,7 @@ public class Mode {
     {
         //Karte, die im Stich ganz unten liegt
         Card unten = null;
-        //unterste Karte wird durch pop() vom Stack geholt
+        //unterste Karte wird durch lastElement() vom Stack geholt
         if(!c2.empty()) {
             unten = c2.lastElement();
         }
