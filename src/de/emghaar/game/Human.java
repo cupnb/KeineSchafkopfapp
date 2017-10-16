@@ -223,7 +223,6 @@ public class Human implements Player
     {
 
         //darf nur gemacht werden, wenn wannaplay true ist
-        //TODO Fehler: Wenn man etwas < 1 bzw. > 8 eingibt, crasht das Spiel
         if (wannaplay) {
             System.out.println("Was spielst du, " + name + "? 1 - 3 Sauspiele S G E, 4 Wenz, 5 - 8 Solo S G E H");
             Scanner scan = new Scanner(System.in);
@@ -331,7 +330,7 @@ public class Human implements Player
      * @param n Index des Spielers
      */
     public void giveNumber(int n) {
-        System.out.println("Du bis Spieler Nummer " + (n+1));
+        System.out.println(name + ", du bis Spieler Nummer " + (n+1));
     }
 
     /**

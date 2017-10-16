@@ -3,6 +3,7 @@
     <output-path>$PROJECT_DIR$/out/artifacts/KeineSchafkopfapp_jar</output-path>
     <root id="archive" name="KeineSchafkopfapp.jar">
       <element id="module-output" name="KeineSchafkopfapp" />
+      <element id="dir-copy" path="$PROJECT_DIR$/out/production/KeineSchafkopfapp/META-INF" />
     </root>
   </artifact>
 </component>
