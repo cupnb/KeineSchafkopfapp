@@ -138,6 +138,10 @@ public class Mode {
             }
         }
         //LinkedList wird zurückgegeben
+        if(giveBack.isEmpty())
+        {
+            giveBack = c1;
+        }
         return giveBack;
     }
 

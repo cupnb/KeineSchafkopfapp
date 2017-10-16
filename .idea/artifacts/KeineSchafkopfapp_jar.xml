@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="KeineSchafkopfapp:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/KeineSchafkopfapp_jar</output-path>
+    <root id="archive" name="KeineSchafkopfapp.jar">
+      <element id="module-output" name="KeineSchafkopfapp" />
+    </root>
+  </artifact>
+</component>
