@@ -264,7 +264,7 @@ public class Human implements Player
     {
         Card playingCard;
         Mode m = game.getMode();
-        LinkedList<Card> temp = m.showPlayableCards((LinkedList<Card>) hand.clone(), game.getDump(), game.getCallingColor(), game.getMode().getModeType());
+        LinkedList<Card> temp = m.showPlayableCards((LinkedList<Card>) hand.clone(), game.getPlayed(), game.getCallingColor(), game.getMode().getModeType());
         System.out.println(name + ", du hast die Karten : ");
         for (Card karte: temp)
         {

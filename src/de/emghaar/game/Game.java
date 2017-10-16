@@ -122,15 +122,17 @@ public class Game {
     }
 
     /**
-     * Getter Methode für Dump
+     * Getter Methode für Played
      *
-     * @author Lukas Dröse
+     * @author Alex Ullrich
      * @return Gibt den Stack Dump zurück
      */
-    Stack getDump()
+    Stack getPlayed()
     {
-        return dump;
+        return played;
     }
+
+
 
     /**
      * Methode, die immer am Anfang eines Games aufgerufen wird
