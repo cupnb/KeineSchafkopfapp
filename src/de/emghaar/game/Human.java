@@ -274,7 +274,7 @@ public class Human implements Player
         System.out.println("Gib eine Karte ein");
 
         System.out.println("Hand size: " + hand.size());
-        playingCard = temp.get(scannerFortInt(temp));
+        playingCard = temp.get(scannerForInt(temp));
         hand.remove(playingCard);
         //game.addgespielteKarte(playingCard); Testweise auskommentiert, siehe _TODO
         return playingCard;
@@ -304,19 +304,47 @@ public class Human implements Player
         return false;
     }
 
+    /**
+     * Methode, die den Spielmodus (z.B. Ramsch, Solo) an den Spieler uebergibt
+     *
+     * @author Alex Ullrich
+     * @param m Mode des jeweiligen Spieles, in dem er gerade ist
+     */
     public void giveMode(Mode.MODE_TYPE m) {
         System.out.println(name + "Der gespielte Mode ist: " +m);
     }
 
+    /**
+     * Methode, die dem Spieler den Spieler uebergibt, der spielt
+     *
+     * @author NOah Boeckmann, Alex Ullrich
+     * @param p Index des Spielers, der spielt
+     */
     public void giveSpielender(int p) {
         System.out.println("Der Spieler " + (p+1) +" spielt");
     }
 
+    /**
+     * Methode, die den Index des Spielers uebergibt
+     *
+     * @author Alex Ullrich
+     * @param n Index des Spielers
+     */
     public void giveNumber(int n) {
         System.out.println("Du bis Spieler Nummer " + (n+1));
     }
 
-    private int scannerFortInt(LinkedList<Card> c1)
+    /**
+     * Methode, die die Karte, die gespielt werden soll ausgibt
+     *
+     * - Catched mögliche Exceptions
+     * --> wenn gecatched, dann wird die Methode rekursiv erneut aufgerufen
+     *
+     * @author Alex Ullrich
+     * @param c1 Liste der spielbaren Karten auf einer Hand
+     * @return Zahl des Indexes der Karte, die gespielt werden soll
+     */
+    public int scannerForInt(LinkedList<Card> c1)
     {
         Scanner sc = new Scanner(System.in);
         int k;
@@ -325,15 +353,20 @@ public class Human implements Player
         {
             System.err.println(e);
             System.out.println("Error. Wert nicht möglich! Neue Eingabe");
-            return scannerFortInt(c1);
+            return scannerForInt(c1);
         }
         try {c1.get(k);}
         catch (IndexOutOfBoundsException e)
         {
             System.err.println(e);
             System.out.println("Error. Wert nicht möglich! Neue Eingabe");
-            return scannerFortInt(c1);
+            return scannerForInt(c1);
         }
         return k;
     }
+
+    /**
+     * Methode ist egal. Ist nur aufgrund des Interfaces implementiert (wird bei der Klasse Bot gebraucht)
+     */
+    public void setMatrix(Card[][] botMatrix) {}
 }

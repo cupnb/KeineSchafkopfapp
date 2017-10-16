@@ -11,6 +11,16 @@ import de.emghaar.game.card.CardRank;
 import static de.emghaar.game.Mode.MODE_TYPE.*;
 
 
+/**
+ * Beinhaltet den Modus des Spiels (z.B. SauSpielenSchellen, Solo, Wenz)
+ *
+ * - Getter und Setter Methoden
+ * - spielbare Karten des Spielers werden fuer jeden Stich erneut wieder ausgegeben
+ * - Karten werden vor jedem Sauspiel auf Fehler geprueft (Ass in eigener Hand enthalten)
+ * - Comparisons fuer die Karten werden je nach Spielmodus aktualisiert
+ *
+ * @author Noah Boeckmann, Sebastian Waetzold, Alex Ullrich
+ */
 //Klasse die alles um den Spielmodus enthält
 public class Mode {
     private MODE_TYPE mode_type;
@@ -21,18 +31,39 @@ public class Mode {
     //-1 = keine
     private int trumpfcolor;
 
+    /**
+     * Konstruktor der Klasse Mode
+     *
+     * - ModeType wird gesetzt
+     * - Trumpffarbe wird auf -1 gesetzt
+     *
+     * @author Sebastian Waetzold, Noah Boeckmann, Alex Ullrich
+     * @param m Spielmodus des Spiels wird uebergeben
+     */
     Mode(MODE_TYPE m)
     {
         mode_type = m;
         trumpfcolor = -1;
     }
 
+    /**
+     * Getter Methode von ModeType
+     *
+     * @author Alex Ullrich
+     * @return ModeType
+     */
     //getter Methode
     MODE_TYPE getModeType()
     {
         return mode_type;
     }
 
+    /**
+     * Setter Methode von ModeType
+     *
+     * @author Alex Ullrich
+     * @param m ModeType, der gesetzt werden soll
+     */
     //setter Methode
     void setModeType(MODE_TYPE m)
     {
@@ -45,12 +76,25 @@ public class Mode {
         return trumpfcolor;
     }
 
+    /**
+     * Setter Methode von Trumpfcolor
+     *
+     * @author Alex Ullrich
+     * @param y int der Trumpffarbe, die gesetzt werden soll
+     */
     //setter Methode
     void setTrumpfcolor(int y)
     {
         trumpfcolor = y;
     }
 
+    /**
+     * @param c1 Hand des Spielers, die gecheckt werden soll
+     * @param c2
+     * @param Ruffarbe
+     * @param c3
+     * @return
+     */
     //spielbare Karten werden geckeckt und mit einer LinkedList
     //Methode zur anzeigen der spielbaren Karten
     //TODO Methode ist noch nicht ganz ausgearbeitet: verschiedene Fehler --> nimmt immer die zuletzt gespielte Karte zum vergleichen

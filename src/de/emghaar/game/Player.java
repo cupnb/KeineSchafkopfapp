@@ -5,6 +5,14 @@ import java.util.Stack;
 
 import de.emghaar.game.card.Card;
 
+/**
+ * Interface für die verschiedenen Spielerarten Human und Bot
+ *
+ * --> Typisches Interface
+ * Methoden werden in Klasse Human beschrieben
+ *
+ * @author Alex Duca, Alex Ullrich
+ */
 public interface Player
 {
     void setGame(Game g);
@@ -24,4 +32,6 @@ public interface Player
     void giveMode(Mode.MODE_TYPE m);
     void giveSpielender(int p);
     void giveNumber(int n);
+    int scannerForInt(LinkedList<Card> c1);
+    void setMatrix(Card[][] botMatrix);
 }

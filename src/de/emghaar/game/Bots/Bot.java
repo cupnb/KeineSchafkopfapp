@@ -143,6 +143,11 @@ public class Bot implements Player
             stiche.push(s.pop());
         }
     }
+
+    public int scannerForInt(LinkedList<Card> c1)
+    {
+        return 74154;
+    }
     //------------------------Ende Default Methoden--------------------
 
     public void bestimmeMitspielerAnfang()
