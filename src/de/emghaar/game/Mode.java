@@ -102,6 +102,7 @@ public class Mode {
     {
         //Karte, die im Stich ganz unten liegt
         Card unten = null;
+        LinkedList<Card> c4 = (LinkedList<Card>) c1.clone();
         //unterste Karte wird durch lastElement() vom Stack geholt
         if(!c2.empty()) {
             unten = c2.lastElement();
@@ -140,7 +141,7 @@ public class Mode {
         //LinkedList wird zurückgegeben
         if(giveBack.isEmpty())
         {
-            giveBack = c1;
+            giveBack = c4;
         }
         return giveBack;
     }
