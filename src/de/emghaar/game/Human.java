@@ -1,5 +1,6 @@
 package de.emghaar.game;
 
+import java.util.InputMismatchException;
 import java.util.LinkedList;
 import java.util.Stack;
 import java.util.Scanner;
@@ -227,23 +228,36 @@ public class Human implements Player
             System.out.println("Was spielst du, " + name + "? 1 - 3 Sauspiele S G E, 4 Wenz, 5 - 8 Solo S G E H");
             Scanner scan = new Scanner(System.in);
             int l = scan.nextInt();
-            switch (l){
-                case 1 : return Mode.MODE_TYPE.SAUSPIELSCHELLEN;
-                case 2 : return Mode.MODE_TYPE.SAUSPIELGRAS;
-                case 3 : return Mode.MODE_TYPE.SAUSPIELEICHEL;
-                case 4 : return Mode.MODE_TYPE.WENZ;
-                case 5 : return Mode.MODE_TYPE.SOLOSCHELLEN;
-                case 6 : return Mode.MODE_TYPE.SOLOGRAS;
-                case 7 : return Mode.MODE_TYPE.SOLOEICHEL;
-                case 8 : return Mode.MODE_TYPE.SOLOHERZ;
-                default : System.err.println("Error"); return play();
+            try {
+                switch (l) {
+                    case 1:
+                        return Mode.MODE_TYPE.SAUSPIELSCHELLEN;
+                    case 2:
+                        return Mode.MODE_TYPE.SAUSPIELGRAS;
+                    case 3:
+                        return Mode.MODE_TYPE.SAUSPIELEICHEL;
+                    case 4:
+                        return Mode.MODE_TYPE.WENZ;
+                    case 5:
+                        return Mode.MODE_TYPE.SOLOSCHELLEN;
+                    case 6:
+                        return Mode.MODE_TYPE.SOLOGRAS;
+                    case 7:
+                        return Mode.MODE_TYPE.SOLOEICHEL;
+                    case 8:
+                        return Mode.MODE_TYPE.SOLOHERZ;
+                    default:
+                        System.err.println("Error");
+                        return play();
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Unerlaubter Wert, nochmal versuchen...");
+                return play();
             }
         }
-        else
-        {
-            System.err.println("Fehler: Spieler wurde gefragt, obwohl er nicht spielen moechte");
-            return null;
-        }
+        System.err.println("FEHLER. HILFE. ES GEHT NICHT. OH NEIN");
+        return null;
+
     }
 
     /**
