@@ -91,14 +91,14 @@ public class Mode {
     /**
      * @param c1 Hand des Spielers, die gecheckt werden soll
      * @param c2
-     * @param Ruffarbe
+     * @param ruffarbe
      * @param c3
      * @return
      */
     //spielbare Karten werden geckeckt und mit einer LinkedList
     //Methode zur anzeigen der spielbaren Karten
     //TODO Methode ist noch nicht ganz ausgearbeitet: verschiedene Fehler --> nimmt immer die zuletzt gespielte Karte zum vergleichen
-    LinkedList<Card> showPlayableCards(LinkedList<Card> c1, Stack<Card> c2, int Ruffarbe, MODE_TYPE c3)
+    LinkedList<Card> showPlayableCards(LinkedList<Card> c1, Stack<Card> c2, CardColor ruffarbe, MODE_TYPE c3)
     {
         //Karte, die im Stich ganz unten liegt
         Card unten = null;
@@ -123,7 +123,7 @@ public class Mode {
             if(c3 == SAUSPIELEICHEL || c3 == SAUSPIELGRAS || c3 == SAUSPIELSCHELLEN)
             {
                 //Wenn das Prüfen positiv ausfällt, wird die Karte zur LinkedList hinzugefügt
-                if (pruefenSauSpiel(temporaryArray[i - 1], unten, temporaryArray, Ruffarbe)) {
+                if (pruefenSauSpiel(temporaryArray[i - 1], unten, temporaryArray, ruffarbe)) {
                     //Karte wird zur LinkedList hinzugefügt
                     giveBack.addFirst(temporaryArray[i - 1]);
                 }
@@ -147,7 +147,7 @@ public class Mode {
     }
 
     //Methode zum Prüfen einer Karte und ob sie gespielt werden darf bzw. nicht
-    private boolean pruefenSauSpiel(Card c1, Card unten, Card[] c3, int Ruffarbe)
+    private boolean pruefenSauSpiel(Card c1, Card unten, Card[] c3, CardColor ruffarbe)
     {
         //Boolean zur Bestimmung, ob das Ass auf der Hand ist
         boolean ass = false;
@@ -155,13 +155,13 @@ public class Mode {
         if(unten == null)
         {
             //Wenn die angespielte Farbe die Ruffarbe ist (Farbe, auf die gespielt wird)
-            if(c1.getColor().convertToInt() == Ruffarbe)
+            if (c1.getColor() == ruffarbe)
             {
                 //Durchschauen, ob das Ass auf der Hand ist
                 for(int p=c3.length;p>0;p--)
                 {
                     //Wenn das Ass dabei ist wird der Boolean auf true gesetzt
-                    if(c3[p-1].getColor().convertToInt() == Ruffarbe && c3[p-1].getRank() == CardRank.ASS)
+                    if (c3[p - 1].getColor() == ruffarbe && c3[p - 1].getRank() == CardRank.ASS)
                     {
                         ass = true;
                     }
@@ -183,7 +183,7 @@ public class Mode {
                         for(int k=c3.length;k>0;k--)
                         {
                             //Farbe der Karten wird mit der Ruffarbe abgeglichen --> Ja, dann wird y um 1 erhöht
-                            if(c3[k-1].getColor().convertToInt() == Ruffarbe)
+                            if (c3[k - 1].getColor() == ruffarbe)
                             {
                                 //Ober und Unter der Ruffarbe werden ausgeschlossen --> Zählen nicht als normale Farbkarten --> y wird um 1 erhöht
                                 if(c3[k-1].getRank() != CardRank.OBER|| c3[k-1].getRank() != CardRank.UNTER)
@@ -215,11 +215,11 @@ public class Mode {
             if (c1.getColor() == unten.getColor() && c1.getRank() != CardRank.UNTER && c1.getRank() != CardRank.OBER)
             {
                 //Wenn die angespielte Farbe die Ruffarbe ist (Farbe, auf die gespielt wird)
-                if (c1.getColor().convertToInt() == Ruffarbe) {
+                if (c1.getColor() == ruffarbe) {
                     //Durchschauen, ob das Ass auf der Hand ist
                     for (int z = c3.length; z > 0; z--) {
                         //Wenn ja, wird der boolean auf true gesetzt
-                        if (c3[z - 1].getColor().convertToInt() == Ruffarbe && c3[z - 1].getRank() == CardRank.ASS) {
+                        if (c3[z - 1].getColor() == ruffarbe && c3[z - 1].getRank() == CardRank.ASS) {
                             ass = true;
                         }
                     }

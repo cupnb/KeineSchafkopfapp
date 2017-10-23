@@ -43,7 +43,7 @@ public class Game {
     //2 = Laub
     //3 = Eichel
     //-1 = keine
-    private int callingColor;
+    private CardColor callingColor;
     //Rundenummer
     private int roundnumber;
     //Anzahl der SPieler, die selbst spielen wollen
@@ -97,7 +97,7 @@ public class Game {
         dealer = rnd.nextInt(4);
         matrix = new Card[4][8];
         playedStiche = 0;
-        callingColor = -1;
+        callingColor = CardColor.UNDEFINED;
         roundnumber = 0;
         anzahlSpielenWollen = 0;
         System.out.println("Konstruktor fertig abgeschlossen");
@@ -151,7 +151,7 @@ public class Game {
     private void initialize() {
         System.out.println("Methode initialize aufgerufen");
         //Ruffarbe wird zurueckgesetzt
-        setCallingColor(-1);
+        setCallingColor(CardColor.UNDEFINED);
         //Roundnumber wird um eins erhöht
         roundnumber++;
         //Ruffarbe wird auf den Standard gesetzt
@@ -269,19 +269,19 @@ public class Game {
                 case SAUSPIELEICHEL:
                     now = sucheKarte(players[0].getHand(), players[1].getHand(), players[2].getHand(), players[3].getHand(), CardRank.ASS, CardColor.EICHEL);
                     players[now].setPlayer(true);
-                    setCallingColor(3);
+                    setCallingColor(CardColor.EICHEL);
                     System.out.println("Zusammen mit " + players[now].getName());
                     break;
                 case SAUSPIELSCHELLEN:
                     now = sucheKarte(players[0].getHand(), players[1].getHand(), players[2].getHand(), players[3].getHand(), CardRank.ASS, CardColor.SCHELLEN);
                     players[now].setPlayer(true);
-                    setCallingColor(1);
+                    setCallingColor(CardColor.SCHELLEN);
                     System.out.println("Zusammen mit " + players[now].getName());
                     break;
                 case SAUSPIELGRAS:
                     now = sucheKarte(players[0].getHand(), players[1].getHand(), players[2].getHand(), players[3].getHand(), CardRank.ASS, CardColor.LAUB);
                     players[now].setPlayer(true);
-                    setCallingColor(2);
+                    setCallingColor(CardColor.LAUB);
                     System.out.println("Zusammen mit " + players[now].getName());
                     break;
                 //Kontrollfunktion, falls der Mode nicht ausgewaehlt werden konnte
@@ -472,7 +472,7 @@ public class Game {
      * @return Zahl der Spielfarbe
      */
     //getter Methode
-    int getCallingColor() {
+    CardColor getCallingColor() {
         return callingColor;
     }
 
@@ -481,11 +481,11 @@ public class Game {
      *
      * @author Alex Ullrich
      *
-     * @param x Wert, der als callingColor gesetzt werden soll
+     * @param cardColor Wert, der als callingColor gesetzt werden soll
      */
     //setter Methode
-    private void setCallingColor(int x) {
-        callingColor = x;
+    private void setCallingColor(CardColor cardColor) {
+        callingColor = cardColor;
     }
 
     /**
