@@ -164,6 +164,7 @@ public class Human implements Player
     //getter Methode von hand
     public LinkedList<Card> getHand()
     {
+        
         return hand;
     }
 
