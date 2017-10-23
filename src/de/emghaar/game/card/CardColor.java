@@ -10,10 +10,11 @@ package de.emghaar.game.card;
 //Festlegung der Farbe einer Karte mithilfe eines Enums
 public enum CardColor {
     //Festlegung der 4 Farben
-    EICHEL("eichel"),
+    SCHELLEN("schellen"),
     LAUB("laub"),
-    HERZ("herz"),
-    SCHELLEN("schellen");
+    EICHEL("eichel"),
+    UNDEFINED("unbestimmt"),
+    HERZ("herz");
 
     //Name der jeweiligen Farbe (z.B. "eichel")
     private String name;
@@ -40,19 +41,4 @@ public enum CardColor {
         return name;
     }
 
-    /**
-     * Konvertiert die Kartenfarbe in Nummern
-     *
-     * @author Alex Ullrich
-     * @return Zahl der Kartenfarbe
-     */
-    public int convertToInt()
-    {
-        switch(getName()) {
-            case "eichel": return 3;
-            case "laub": return 2;
-            case "schellen": return 1;
-            default: return -1;
-        }
-    }
 }
