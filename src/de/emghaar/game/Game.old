@@ -613,6 +613,7 @@ public class Game {
                 if (i != (x-1))
                 {
                     if (players[(auswaehler + i) % 4].setWannaplay() != 0) {
+                    if (players[(auswaehler + i) % 4].setWannaplay() != 0) {
                         willSpieler[i] = true;
                         //Anzahl der Personen, die spielen wollen wird um 1 erhöht
                         anzahlSpielenWollen = anzahlSpielenWollen + 1;
